@@ -1,0 +1,53 @@
+{
+  "Topbar": {
+    "login": "Giris",
+    "logout": "Cikis",
+    "profile": "Profil"
+  },
+  "SideNav": {
+    "home": "Anasayfa",
+    "my-bookings": "Rezervasyonlar",
+    "dashboard": "Gosterge Tablosu",
+    "open-your-own-place": "Kendi Mekanini Ac"
+  },
+  "Auth": {
+    "welcome": "Hosgeldiniz",
+    "welcome-back": "Tekrar Hosgeldiniz",
+    "name": "Isim",
+    "sirname": "Soyisim",
+    "password": "Sifre",
+    "confirm-password": "Sifre Tekrar",
+    "create-a-new-account": "Yeni Bir Hesap Olustur",
+    "or": "ya da",
+    "join-with-google": "Google ile Kaydol",
+    "join-with-github": "Github ile Kaydol",
+    "login-with-google": "Google ile Giris",
+    "login-with-github": "Github ile Giris",
+    "already-a-member": "Zaten Uye misiniz?",
+    "new-to-gather-in": "Gather-in'de Yeni misiniz?",
+    "login": "Giris",
+    "sign-up": "Kaydol",
+    "required": "zorunlu *",
+    "a-valid-email-required": "gecerli bir email zorunlu *",
+    "one-lowercase-one-uppercase-one-number-min-eight-chars-length": "sifreniz kucuk, buyuk harfler ve rakam icermeli, min 8 karakter olmalidir *",
+    "passwords-must-match": "sifreler uyusmalidir *",
+    "place": "Yer"
+  },
+  "User": {
+    "friends": "Arkadas",
+    "my-places": "Mekanlarim",
+    "owner-of": "Sahibi",
+    "add-friend": "Arkadas Ol",
+    "edit": "Duzenle",
+    "upload": "* SVG, PNG, JPG bir imaj yukle",
+    "name": "Isim",
+    "save": "Kaydet",
+    "warning": "Icrige erismek icin giris yapin!"
+  },
+  "Home": {
+    "owner": "Sahibi"
+  },
+  "Search": {
+    "search": "Mekan ve Kisi Ara"
+  }
+}

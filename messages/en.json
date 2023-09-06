@@ -1,0 +1,53 @@
+{
+  "Topbar": {
+    "login": "Login",
+    "logout": "Log out",
+    "profile": "Profile"
+  },
+  "SideNav": {
+    "home": "Home",
+    "my-bookings": "My Bookings",
+    "dashboard": "Dashboard",
+    "open-your-own-place": "Open Your Own Place"
+  },
+  "Auth": {
+    "welcome": "Welcome",
+    "welcome-back": "Welcome Back!",
+    "name": "Name",
+    "sirname": "Sirname",
+    "password": "Password",
+    "confirm-password": "Confirm Password",
+    "create-a-new-account": "Create a New Account",
+    "or": "or",
+    "join-with-google": "Join with Google",
+    "join-with-github": "Join with Github",
+    "login-with-google": "Login with Google",
+    "login-with-github": "Login with Github",
+    "already-a-member": "Already a Member",
+    "new-to-gather-in": "New to Gather-in?",
+    "login": "Login",
+    "sign-up": "Sign-up!",
+    "required": "required *",
+    "a-valid-email-required": "a valid email required *",
+    "one-lowercase-one-uppercase-one-number-min-eight-chars-length": "one lowercase, one uppercase, one number, min eight chars length *",
+    "passwords-must-match": "passwords must match *",
+    "place": "Plcee"
+  },
+  "User": {
+    "friends": "Friends",
+    "my-places": "My Places",
+    "owner-of": "Owner of",
+    "add-friend": "Add Friend",
+    "edit": "Edit",
+    "upload": "* Upload an SVG, PNG, JPG image",
+    "name": "Name",
+    "save": "Save",
+    "warning": "Please login to access the content"
+  },
+  "Home": {
+    "owner": "Owner"
+  },
+  "Search": {
+    "search": "Search Places and People"
+  }
+}
