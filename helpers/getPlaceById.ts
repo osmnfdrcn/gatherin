@@ -7,7 +7,6 @@ export const getPlaceById = async (id: string) => {
         id,
       },
       include: {
-        events: true,
         owner: true,
       },
     });

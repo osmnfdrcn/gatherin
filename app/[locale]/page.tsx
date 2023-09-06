@@ -4,6 +4,8 @@ import { getPlaces } from "@/helpers/getPlaces";
 
 const App = async () => {
   const places = await getPlaces();
+  console.log(places);
+
   return (
     <section className=" w-full">
       <Banner />
@@ -12,11 +14,11 @@ const App = async () => {
           return (
             <Card
               key={p.id}
-              image={p.image}
-              owner={p.owner.name}
-              ownerId={p.owner.id}
-              name={p.name}
-              placeId={p.id}
+              image={p?.image}
+              owner={p?.owner?.name}
+              ownerId={p?.owner?.id}
+              name={p?.name}
+              placeId={p?.id}
             />
           );
         })}

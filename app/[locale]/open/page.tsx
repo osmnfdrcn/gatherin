@@ -2,7 +2,7 @@ import HydrationErrorFix from "@/components/common/hydration";
 import AuthCheck from "@/components/common/protected";
 import OpenYourOwnPlace from "@/components/modules/open-your-own-place";
 import getCurrentUser from "@/helpers/getCurrentUser";
-import React from "react";
+import React, { Suspense } from "react";
 
 type Props = {};
 

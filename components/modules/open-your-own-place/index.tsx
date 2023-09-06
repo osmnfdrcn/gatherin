@@ -37,7 +37,7 @@ const OpenYourOwnPlace = ({ userId }: Props) => {
           description,
           image,
           bgImage,
-          userId,
+          email: session?.user?.email,
         };
 
         const requestOptions: RequestInit = {

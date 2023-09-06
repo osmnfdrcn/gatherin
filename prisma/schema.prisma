@@ -19,8 +19,6 @@ model User {
   updatedAt      DateTime  @updatedAt
   accounts       Account[]
   places         Place[]
-  eventIDs       String[]   @db.ObjectId
-  events         Event[] @relation(fields: [eventIDs], references: [id])  
 }
 
 model Account {
@@ -48,22 +46,10 @@ model Place {
   description    String
   image          String
   bgImage        String
-  events         Event[]
   ownerId        String @db.ObjectId
   owner          User   @relation( fields: [ownerId], references: [id])
 }
 
-model Event {
-  id             String    @id @default(auto()) @map("_id") @db.ObjectId
-  name           String
-  limit          Int
-  description    String
-  image          String
-  placeId        String @db.ObjectId
-  place          Place   @relation(fields: [placeId], references: [id])
-  participantIDs String[]   @db.ObjectId
-  participants  User[] @relation(fields: [participantIDs], references: [id])     
-}
 
 
 

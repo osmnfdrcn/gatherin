@@ -5,12 +5,15 @@ import prisma from "@/lib/prismadb";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, description, image, bgImage, userId } = body;
-    if (!description || !name || !image || !bgImage || !userId) {
+    const { name, description, image, bgImage, email } = body;
+    if (!description || !name || !image || !bgImage || !email) {
       return new NextResponse("Missing Fields", { status: 400 });
     }
-    console.table(body);
-
+    const user = await prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
     const place = await prisma.place.create({
       data: {
         name,
@@ -19,7 +22,7 @@ export async function POST(request: Request) {
         bgImage,
         owner: {
           connect: {
-            id: userId,
+            id: user?.id,
           },
         },
       },

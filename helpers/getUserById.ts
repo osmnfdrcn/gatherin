@@ -8,7 +8,6 @@ export const getUserById = async (id: string) => {
       },
       include: {
         places: true,
-        events: true,
       },
     });
     if (!currentUser) return null;

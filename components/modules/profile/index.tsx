@@ -85,9 +85,6 @@ const UserProfile = ({ user }: Props) => {
               <p className="text-slate-800 text-2xl font-semibold">
                 {user?.name}
               </p>
-              <p className="text-steel-blue font-bold ">
-                {user?.events.length} {t("friends")}
-              </p>
             </div>
           </div>
           <div className="w-full border-t-[1px] border-b-[1px] border-steel-blue py-6">

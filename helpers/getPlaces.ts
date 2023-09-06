@@ -4,10 +4,11 @@ export const getPlaces = async () => {
   try {
     const places = await prisma.place.findMany({
       include: {
-        events: true,
         owner: true,
       },
     });
+    console.log({ places });
+
     if (!places) return null;
     return places;
   } catch (error) {
