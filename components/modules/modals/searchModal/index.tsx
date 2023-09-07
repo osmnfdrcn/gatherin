@@ -37,14 +37,11 @@ const Search = () => {
         if (response.ok) {
           const responseData = await response.json();
           setData(responseData);
-          // Do something with the response data if needed.
         } else {
           console.error("Something went wrong:", response.statusText);
-          // Handle the error, e.g., show an error message to the user.
         }
       } catch (error) {
         console.error("Something went wrong:", error);
-        // Handle the error, e.g., show an error message to the user.
       }
     }
   };
