@@ -7,7 +7,6 @@ export const getPlaces = async () => {
         owner: true,
       },
     });
-    console.log({ places });
 
     if (!places) return null;
     return places;

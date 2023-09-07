@@ -1,4 +1,3 @@
-import bcrypt from "bcrypt";
 import { NextResponse } from "next/server";
 
 import prisma from "@/lib/prismadb";
@@ -6,10 +5,10 @@ import prisma from "@/lib/prismadb";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, bio, image, email } = body;
+    const { name, bio, image, id } = body;
     const existingUser = await prisma.user.findUnique({
       where: {
-        email,
+        id,
       },
     });
 
@@ -28,7 +27,7 @@ export async function POST(request: Request) {
 
     const updatedUser = await prisma.user.update({
       where: {
-        email,
+        id,
       },
       data: updatedData,
     });

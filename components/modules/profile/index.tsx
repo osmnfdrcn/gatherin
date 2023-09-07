@@ -6,12 +6,12 @@ import blankProfileImage from "@/public/images/blank_profile.jpeg";
 import { IUser } from "@/types";
 import { useFormik } from "formik";
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import Link from "next/link";
-import { useTranslations } from "next-intl";
 type Props = {
   user: IUser;
 };
@@ -36,7 +36,7 @@ const UserProfile = ({ user }: Props) => {
           name,
           bio,
           image,
-          email: user.email,
+          id: session?.user.id,
         };
 
         const requestOptions: RequestInit = {
@@ -51,12 +51,11 @@ const UserProfile = ({ user }: Props) => {
               toast.success("Kayit basarili");
               router.refresh();
             } else {
-              // daha sonra error mesajlarini api'dan al.
-              toast.error("!");
+              toast.error("An Error Occured");
             }
           })
           .catch((error) => {
-            console.log(error);
+            toast.error("An Error Occured");
           })
           .finally(() => {
             formik.resetForm();

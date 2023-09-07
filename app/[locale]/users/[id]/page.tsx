@@ -4,11 +4,11 @@ import { IUser } from "@/types";
 
 type Props = {
   params: {
-    slug: string;
+    id: string;
   };
 };
-const User = async ({ params: { slug } }: Props) => {
-  const user = await getUserById(slug);
+const User = async ({ params: { id } }: Props) => {
+  const user = await getUserById(id);
 
   return <UserProfile user={user as IUser} />;
 };
