@@ -51,7 +51,7 @@ const UserProfile = ({ user }: Props) => {
               toast.success("Kayit basarili");
               router.refresh();
             } else {
-              toast.error("An Error Occured");
+              toast.error("Bir hata olustu.");
             }
           })
           .catch((error) => {
