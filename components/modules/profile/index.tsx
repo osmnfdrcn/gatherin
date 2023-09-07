@@ -45,7 +45,10 @@ const UserProfile = ({ user }: Props) => {
           body: JSON.stringify(data),
         };
 
-        await fetch("http://localhost:3000/api/user/update", requestOptions)
+        await fetch(
+          `${process.env.NEXT_PUBLIC_SITE_URL}/api/user/update`,
+          requestOptions
+        )
           .then((res) => {
             if (res?.ok) {
               toast.success("Kayit basarili");
