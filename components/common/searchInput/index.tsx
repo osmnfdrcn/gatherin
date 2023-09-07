@@ -13,7 +13,7 @@ const SearchInput = () => {
     <div className=" hidden absolute top-0 left-0 right-0 md:flex justify-between items-center w-full px-[10px] h-[100px]">
       <Input
         placeholder="Search Places or People"
-        className="w-[260px] border-none bg-slate-100 rounded-full p-[20px] text-lg font-semibold text-slate-700"
+        className="w-[260px] border-none bg-slate-100 rounded-full py-[20px] text-lg font-semibold text-slate-700"
         onClick={handleClick}
       />
       <Icons showMenuBar={false} />

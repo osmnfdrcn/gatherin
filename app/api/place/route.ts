@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 import prisma from "@/lib/prismadb";
 
@@ -25,6 +25,26 @@ export async function POST(request: Request) {
     });
 
     return NextResponse.json(place, { status: 201 });
+  } catch (error) {
+    return NextResponse.error();
+  }
+}
+
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const search = searchParams.get("search");
+
+  let query: any = {};
+  search ? (query.name = { contains: search, mode: "insensitive" }) : null;
+  try {
+    const places = await prisma.place.findMany({
+      where: query,
+      include: {
+        owner: true,
+      },
+    });
+
+    return NextResponse.json(places, { status: 201 });
   } catch (error) {
     return NextResponse.error();
   }

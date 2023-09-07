@@ -1,6 +1,7 @@
 import Card from "@/components/common/card";
 import Banner from "@/components/modules/banner";
 import { getPlaces } from "@/helpers/getPlaces";
+export const dynamic = "force-static";
 
 const App = async () => {
   const places = await getPlaces();
@@ -27,3 +28,15 @@ const App = async () => {
 };
 
 export default App;
+
+// import Wrapper from "@/components/layout/wrapper";
+// import { getPlaces } from "@/helpers/getPlaces";
+// export const dynamic = "force-dynamic";
+
+// const App = async () => {
+//   const places = await getPlaces();
+
+//   return <Wrapper data={places} />;
+// };
+
+// export default App;
