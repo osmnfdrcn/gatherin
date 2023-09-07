@@ -10,7 +10,7 @@ const TopNav = async () => {
     <nav className="w-full h-[100px]  bg-slate-50  py-[30px] px-[20px]">
       <div className="flex items-center md:items-start justify-between">
         <Logo />
-        <Icons userID={user?.id as string} />
+        <Icons />
       </div>
     </nav>
   );

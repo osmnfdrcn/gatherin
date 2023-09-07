@@ -1,13 +1,10 @@
 "use client";
-import { Input } from "@/components/ui/input";
 import Icons from "@/components/layout/navigation/topnav/icons";
-import { useAppDispatch } from "@/store/store";
+import { Input } from "@/components/ui/input";
 import { setShowSearchBar } from "@/store/slices/appSlice";
-type Props = {
-  userId: string;
-};
+import { useAppDispatch } from "@/store/store";
 
-const Search = ({ userId }: Props) => {
+const SearchInput = () => {
   const dispatch = useAppDispatch();
   const handleClick = () => {
     dispatch(setShowSearchBar(true));
@@ -17,12 +14,11 @@ const Search = ({ userId }: Props) => {
       <Input
         placeholder="Search Places or People"
         className="w-[260px] border-none bg-slate-100 rounded-full p-[20px] text-lg font-semibold text-slate-700"
-        // value={searchString}
         onClick={handleClick}
       />
-      <Icons showMenuBar={false} userID={userId as string} />
+      <Icons showMenuBar={false} />
     </div>
   );
 };
 
-export default Search;
+export default SearchInput;

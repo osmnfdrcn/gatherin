@@ -7,9 +7,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-const Layout = async ({ children }: Props) => {
-  const user = await getCurrentUser();
-
+const Layout = ({ children }: Props) => {
   // const [searchString, setSearchString] = useState("");
   //ref ile erisip enter'a basilinca search yonlenddirmesini yap /?search=searchString
   // const handleChange = (e: any) => {
@@ -24,7 +22,7 @@ const Layout = async ({ children }: Props) => {
           // value={searchString}
           // onChange={handleChange}
         />
-        <Icons showMenuBar={false} userID={user?.id as string} />
+        <Icons showMenuBar={false} />
       </div>
       {children}
     </div>

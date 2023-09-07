@@ -4,7 +4,6 @@ import { getPlaces } from "@/helpers/getPlaces";
 
 const App = async () => {
   const places = await getPlaces();
-  console.log(places);
 
   return (
     <section className=" w-full">

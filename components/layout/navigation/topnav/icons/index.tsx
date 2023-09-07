@@ -3,7 +3,7 @@ import Button from "@/components/ui/button";
 import { setShowLoginModal, setShowMobileMenu } from "@/store/slices/appSlice";
 import { RootState, useAppDispatch, useAppSelector } from "@/store/store";
 import { signOut, useSession } from "next-auth/react";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next-intl/client";
 import { useRef, useState } from "react";
 import { HiOutlineMenu } from "react-icons/hi";
@@ -13,10 +13,9 @@ import LanguageSwitcher from "../../languageSwitcher";
 
 type Props = {
   showMenuBar?: boolean;
-  userID: string;
 };
 
-const Icons = ({ showMenuBar = true, userID }: Props) => {
+const Icons = ({ showMenuBar = true }: Props) => {
   const t = useTranslations("Topbar");
   const { data: session } = useSession();
   const [showUserMenu, setShowUserMenu] = useState(false);
@@ -26,7 +25,7 @@ const Icons = ({ showMenuBar = true, userID }: Props) => {
 
   const handleProfileClick = () => {
     setShowUserMenu(false);
-    router.push(`/users/${userID}`);
+    router.push(`/users/${session?.user.id}`);
   };
   const handleClickOutside = () => {
     setShowUserMenu(false);

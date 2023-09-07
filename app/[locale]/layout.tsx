@@ -1,6 +1,6 @@
 import Navbar from "@/components/layout/navigation";
-import LoginModal from "@/components/modules/authModals/loginModal";
-import RegisterModal from "@/components/modules/authModals/registerModal";
+import LoginModal from "@/components/modules/modals/authModals/loginModal";
+import RegisterModal from "@/components/modules/modals/authModals/registerModal";
 import AuthProvider from "@/providers/AuthProvider";
 import NotificationProvider from "@/providers/NotificationProvider";
 import { StateProvider } from "@/providers/StateProvider";
@@ -9,7 +9,7 @@ import { Inter } from "next/font/google";
 import { notFound } from "next/navigation";
 import React from "react";
 import "./globals.css";
-import Search from "@/components/modules/search";
+import Search from "@/components/modules/modals/searchModal";
 
 export function generateStaticParams() {
   return [{ locale: "en" }, { locale: "tr" }];

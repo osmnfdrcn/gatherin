@@ -8,11 +8,8 @@ import { useFormik } from "formik";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
-type Props = {
-  userId: string;
-};
 
-const OpenYourOwnPlace = ({ userId }: Props) => {
+const OpenYourOwnPlace = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [image, setImage] = useState<string | null>("");
@@ -37,7 +34,7 @@ const OpenYourOwnPlace = ({ userId }: Props) => {
           description,
           image,
           bgImage,
-          email: session?.user?.email,
+          userId: session?.user.id,
         };
 
         const requestOptions: RequestInit = {

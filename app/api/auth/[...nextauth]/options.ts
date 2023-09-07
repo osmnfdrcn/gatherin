@@ -53,6 +53,16 @@ export const options: NextAuthOptions = {
   pages: {
     signIn: "/",
   },
+  callbacks: {
+    async jwt({ user, token }) {
+      return { ...user, ...token };
+    },
+    async session({ session, user, token }) {
+      session.user = token as any;
+      return session;
+    },
+  },
+
   debug: process.env.NODE_ENV === "development",
   session: {
     strategy: "jwt",

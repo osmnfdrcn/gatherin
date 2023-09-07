@@ -28,8 +28,6 @@ const UserProfile = ({ user }: Props) => {
       name: "",
       bio: "",
     },
-    // validationSchema: FormSchema,
-
     onSubmit: async () => {
       setIsLoading(true);
       const { name, bio } = formik.values;

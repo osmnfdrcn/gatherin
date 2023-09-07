@@ -13,6 +13,7 @@ type Props = {
 const Place = ({ id, place }: Props) => {
   const [joined, setJoined] = useState(false);
   const { data: session } = useSession();
+
   if (joined) {
     return <VideoConference roomID={id} name={session?.user?.name as string} />;
   }
