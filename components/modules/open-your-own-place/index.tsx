@@ -14,7 +14,7 @@ const OpenYourOwnPlace = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [image, setImage] = useState<string | null>("");
   const [bgImage, setBgImage] = useState<string | null>("");
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   const router = useRouter();
   const formik = useFormik({
@@ -75,7 +75,7 @@ const OpenYourOwnPlace = () => {
     return !name || !description || !image || !bgImage || isLoading;
   };
 
-  if (!session) {
+  if (status !== "authenticated") {
     return (
       <div className=" p-4 text-lg text-rose-500 font-semibold">
         Please login to access the content

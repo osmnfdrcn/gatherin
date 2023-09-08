@@ -12,7 +12,7 @@ type Props = {
 
 const Place = ({ id, place }: Props) => {
   const [joined, setJoined] = useState(false);
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   if (joined) {
     return <VideoConference roomID={id} name={session?.user?.name as string} />;
@@ -35,7 +35,7 @@ const Place = ({ id, place }: Props) => {
           </div>
           <p className="text-lg ">Sahibi {place?.owner.name}</p>
           <p className=" text-sm"> {place?.description}</p>
-          {session ? (
+          {status === "authenticated" ? (
             <Button
               variant={"primary"}
               className="w-1/2 bg-slate-800 text-white py-2 px-4 rounded-lg "

@@ -10,6 +10,7 @@ import { notFound } from "next/navigation";
 import React from "react";
 import "./globals.css";
 import Search from "@/components/modules/modals/searchModal";
+import Wrapper from "@/components/layout/wrapper";
 
 export function generateStaticParams() {
   return [{ locale: "en" }, { locale: "tr" }];
@@ -43,14 +44,16 @@ export default async function RootLayout({
         <StateProvider>
           <NextIntlClientProvider locale={locale} messages={messages}>
             <AuthProvider>
-              <div className="flex flex-col md:flex-row">
-                <Search />
-                <NotificationProvider />
-                <LoginModal />
-                <RegisterModal />
-                <Navbar />
-                {children}
-              </div>
+              <Wrapper>
+                <div className="flex flex-col md:flex-row">
+                  <Search />
+                  <NotificationProvider />
+                  <LoginModal />
+                  <RegisterModal />
+                  <Navbar />
+                  {children}
+                </div>
+              </Wrapper>
             </AuthProvider>
           </NextIntlClientProvider>
         </StateProvider>

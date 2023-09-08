@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import blankProfileImage from "@/public/images/blank_profile.jpeg";
 import { IUser } from "@/types";
 import { useFormik } from "formik";
+import { stat } from "fs";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
@@ -19,8 +20,10 @@ const UserProfile = ({ user }: Props) => {
   const t = useTranslations("User");
   const [isEditing, setIsEditing] = useState(false);
   const [image, setImage] = useState<string | null>(user?.image);
+  const { data: session, status } = useSession();
+  const [isLoading2, setIsLoading2] = useState(status);
+
   const [isLoading, setIsLoading] = useState(false);
-  const { data: session } = useSession();
   const ownProfile = user?.email === session?.user?.email;
   const router = useRouter();
   const formik = useFormik({
@@ -68,6 +71,9 @@ const UserProfile = ({ user }: Props) => {
       } catch (error) {}
     },
   });
+  if (status === "loading") {
+    return <div>Loading</div>;
+  }
 
   return (
     <div className=" grid grid-cols-3 py-[8px] px-[10px] gap-8 ">

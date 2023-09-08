@@ -10,6 +10,7 @@ import { HiOutlineMenu } from "react-icons/hi";
 import { IoCloseSharp } from "react-icons/io5";
 import { useOnClickOutside } from "usehooks-ts";
 import LanguageSwitcher from "../../languageSwitcher";
+import Wrapper from "@/components/layout/wrapper";
 
 type Props = {
   showMenuBar?: boolean;
@@ -17,7 +18,7 @@ type Props = {
 
 const Icons = ({ showMenuBar = true }: Props) => {
   const t = useTranslations("Topbar");
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [showUserMenu, setShowUserMenu] = useState(false);
   const ref = useRef(null);
   const router = useRouter();
@@ -38,8 +39,8 @@ const Icons = ({ showMenuBar = true }: Props) => {
       } flex items-center justify-end gap-2 `}
     >
       <LanguageSwitcher />
-
-      {session ? (
+      {/* <Wrapper> */}
+      {status === "authenticated" ? (
         <div className="relative flex items-center justify-center">
           <Button
             variant="rounded"
@@ -81,6 +82,7 @@ const Icons = ({ showMenuBar = true }: Props) => {
           </p>
         </Button>
       )}
+      {/* </Wrapper> */}
 
       {showMenuBar ? <MenuBar /> : null}
     </div>
