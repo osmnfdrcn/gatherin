@@ -48,6 +48,7 @@
     "owner": "Sahibi"
   },
   "Search": {
-    "search": "Mekan ve Kisi Ara"
+    "search": "Mekan Ara",
+    "close": "Kapat(Esc)"
   }
 }

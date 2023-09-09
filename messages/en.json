@@ -48,6 +48,7 @@
     "owner": "Owner"
   },
   "Search": {
-    "search": "Search Places and People"
+    "search": "Search Places",
+    "close": "Close(Esc)"
   }
 }
