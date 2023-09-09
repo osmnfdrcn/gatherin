@@ -42,7 +42,9 @@
     "upload": "* SVG, PNG, JPG bir imaj yukle",
     "name": "Isim",
     "save": "Kaydet",
-    "warning": "Icrige erismek icin giris yapin!"
+    "warning": "Icerige erismek icin giris yapin!",
+    "success": "Profil Guncellendi!",
+    "error": "Bir sorun ile karsilasildi!"
   },
   "Home": {
     "owner": "Sahibi"
@@ -50,5 +52,20 @@
   "Search": {
     "search": "Mekan Ara",
     "close": "Kapat(Esc)"
+  },
+  "Place": {
+    "owner": "Sahibi",
+    "join": "Katil"
+  },
+  "OpenYourPlace": {
+    "upload": "** SVG, PNG, JPG bir imaj yukle",
+    "place": "Mekanin adi(gerekli)",
+    "description": "Aciklama(gerekli)",
+    "save": "Kaydet",
+    "close": "Kapat",
+    "auth-warning": "Icerige erismek icin giris yapin!",
+    "open-your-own-place": "Kendi Mekanini Ac",
+    "success": "Mekan Olusturuldu!",
+    "error": "Bir sorun ile karsilasildi!"
   }
 }

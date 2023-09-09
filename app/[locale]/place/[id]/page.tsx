@@ -1,6 +1,5 @@
 import Place from "@/components/modules/place";
 import { getPlaceById } from "@/helpers/getPlaceById";
-import { IPlace } from "@/types";
 
 type Props = {
   params: {

@@ -11,6 +11,7 @@ export async function POST(request: Request) {
         id,
       },
     });
+    console.log(body);
 
     if (!existingUser) {
       return NextResponse.error();

@@ -42,7 +42,9 @@
     "upload": "* Upload an SVG, PNG, JPG image",
     "name": "Name",
     "save": "Save",
-    "warning": "Please login to access the content"
+    "warning": "Please login to access the content",
+    "success": "Profile Updated!",
+    "error": "Encountered an Error!"
   },
   "Home": {
     "owner": "Owner"
@@ -50,5 +52,20 @@
   "Search": {
     "search": "Search Places",
     "close": "Close(Esc)"
+  },
+  "Place": {
+    "owner": "Owner",
+    "join": "Join"
+  },
+  "OpenYourPlace": {
+    "upload": "* Upload an SVG, PNG, JPG image",
+    "place": "Name of the place(required)",
+    "description": "Description(required)",
+    "save": "Save",
+    "close": "Close",
+    "auth-warning": "Please login to access the content",
+    "open-your-own-place": "Open Your Own Place",
+    "success": "Place Created!",
+    "error": "Encountered an Error!"
   }
 }

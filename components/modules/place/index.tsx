@@ -5,12 +5,14 @@ import { IPlace } from "@/types";
 import VideoConference from "@/components/modules/video-conference";
 import Button from "@/components/ui/button";
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 type Props = {
   id: string;
   place: IPlace;
 };
 
 const Place = ({ id, place }: Props) => {
+  const t = useTranslations("Place");
   const [joined, setJoined] = useState(false);
   const { data: session, status } = useSession();
 
@@ -33,7 +35,9 @@ const Place = ({ id, place }: Props) => {
           <div className=" text-2xl lg:text-6xl font-semibold p-0 lg:py-4 -tracking-wide">
             {place?.name}
           </div>
-          <p className="text-lg ">Sahibi {place?.owner.name}</p>
+          <p className="text-lg ">
+            {t("owner")} {place?.owner.name}
+          </p>
           <p className=" text-sm"> {place?.description}</p>
           {status === "authenticated" ? (
             <Button
@@ -41,7 +45,7 @@ const Place = ({ id, place }: Props) => {
               className="w-1/2 bg-slate-800 text-white py-2 px-4 rounded-lg "
               onClick={() => setJoined(true)}
             >
-              Join
+              {t("join")}
             </Button>
           ) : null}
         </div>

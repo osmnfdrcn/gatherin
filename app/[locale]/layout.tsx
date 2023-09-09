@@ -1,3 +1,4 @@
+import React from "react";
 import Navbar from "@/components/layout/navigation";
 import LoginModal from "@/components/modules/modals/authModals/loginModal";
 import RegisterModal from "@/components/modules/modals/authModals/registerModal";
@@ -7,10 +8,9 @@ import { StateProvider } from "@/providers/StateProvider";
 import { NextIntlClientProvider } from "next-intl";
 import { Inter } from "next/font/google";
 import { notFound } from "next/navigation";
-import React from "react";
 import "./globals.css";
-import Search from "@/components/modules/modals/searchModal";
-import Wrapper from "@/components/layout/wrapper";
+import Search from "@/components/modules/modals/search-modal";
+import Wrapper from "@/components/layout/loader";
 
 export function generateStaticParams() {
   return [{ locale: "en" }, { locale: "tr" }];

@@ -10,7 +10,7 @@ import { HiOutlineMenu } from "react-icons/hi";
 import { IoCloseSharp } from "react-icons/io5";
 import { useOnClickOutside } from "usehooks-ts";
 import LanguageSwitcher from "../../languageSwitcher";
-import Wrapper from "@/components/layout/wrapper";
+import Wrapper from "@/components/layout/loader";
 
 type Props = {
   showMenuBar?: boolean;
@@ -39,7 +39,6 @@ const Icons = ({ showMenuBar = true }: Props) => {
       } flex items-center justify-end gap-2 `}
     >
       <LanguageSwitcher />
-      {/* <Wrapper> */}
       {status === "authenticated" ? (
         <div className="relative flex items-center justify-center">
           <Button
@@ -82,7 +81,6 @@ const Icons = ({ showMenuBar = true }: Props) => {
           </p>
         </Button>
       )}
-      {/* </Wrapper> */}
 
       {showMenuBar ? <MenuBar /> : null}
     </div>

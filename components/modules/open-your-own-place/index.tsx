@@ -8,9 +8,11 @@ import { useFormik } from "formik";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
+import Loader from "@/components/layout/loader";
 
 const OpenYourOwnPlace = () => {
-  const [isEditing, setIsEditing] = useState(false);
+  const t = useTranslations("OpenYourPlace");
   const [isLoading, setIsLoading] = useState(false);
   const [image, setImage] = useState<string | null>("");
   const [bgImage, setBgImage] = useState<string | null>("");
@@ -23,8 +25,6 @@ const OpenYourOwnPlace = () => {
       description: "",
       labels: "",
     },
-    // validationSchema: FormSchema,
-
     onSubmit: async () => {
       setIsLoading(true);
       const { name, description } = formik.values;
@@ -49,22 +49,21 @@ const OpenYourOwnPlace = () => {
         )
           .then((res) => {
             if (res?.ok) {
-              toast.success("Kayit basarili");
+              toast.success(t("success"));
               setImage("");
               setBgImage("");
               router.push("/");
             } else {
               // daha sonra error mesajlarini api'dan al.
-              toast.error("!");
+              toast.error(t("error"));
             }
           })
           .catch((error) => {
-            console.log(error);
+            toast.error(t("error"));
           })
           .finally(() => {
             formik.resetForm();
             setIsLoading(false);
-            setIsEditing(false);
           });
       } catch (error) {}
     },
@@ -78,14 +77,16 @@ const OpenYourOwnPlace = () => {
   if (status !== "authenticated") {
     return (
       <div className=" p-4 text-lg text-rose-500 font-semibold">
-        Please login to access the content
+        {t("auth-warning")}
       </div>
     );
   }
-
+  // if (isLoading) {
+  //   return <Loader />;
+  // }
   return (
     <section className="px-4">
-      <Title text="Kendi Mekanini Ac" />
+      <Title text={t("open-your-own-place")} />
       <div className="grid grid-cols-4  flex-col">
         <div className="col-span-4 xl:col-span-3  bg-slate-50 h-[calc(100vh-120px)] p-4 flex flex-col gap-4">
           <div className="flex items-center rounded-lg bg-white w-full h-[80px] p-[10px] md:p-0 md:h-[120px]">
@@ -125,8 +126,7 @@ const OpenYourOwnPlace = () => {
                 onChange={formik.handleChange}
                 rows={5}
                 className="w-full border-none bg-transparent placeholder:text-sm rounded-lg resize-none border-slate-400 test-sm font-light"
-                placeholder="Mekanın adı(gerekli)
-              "
+                placeholder={t("place")}
               ></textarea>
             </div>
             <div className="flex items-center rounded-lg bg-white w-full h-[80px] p-[10px] md:p-0 md:h-[120px]">
@@ -136,7 +136,7 @@ const OpenYourOwnPlace = () => {
                 onChange={formik.handleChange}
                 rows={5}
                 className="w-full border-none bg-transparent placeholder:text-sm rounded-lg resize-none border-slate-400 test-sm font-light"
-                placeholder="Açıklama(gerekli)"
+                placeholder={t("description")}
               ></textarea>
             </div>
 
@@ -148,7 +148,7 @@ const OpenYourOwnPlace = () => {
                 variant={"primary"}
                 className="bg-slate-800 text-white py-2 px-10 rounded-lg text-lg font-semibold  disabled:bg-slate-800/80"
               >
-                Save
+                {t("save")}
               </Button>
             </div>
           </form>
@@ -157,7 +157,7 @@ const OpenYourOwnPlace = () => {
             className="bg-slate-800 text-white py-2 px-10 rounded-lg text-lg font-semibold "
             onClick={() => router.push("/")}
           >
-            Close
+            {t("close")}
           </Button>
         </div>
       </div>
