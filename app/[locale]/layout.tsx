@@ -10,7 +10,7 @@ import { Inter } from "next/font/google";
 import { notFound } from "next/navigation";
 import "./globals.css";
 import Search from "@/components/modules/modals/search-modal";
-import Wrapper from "@/components/layout/loader";
+import Loader from "@/components/layout/loader";
 
 export function generateStaticParams() {
   return [{ locale: "en" }, { locale: "tr" }];
@@ -44,7 +44,7 @@ export default async function RootLayout({
         <StateProvider>
           <NextIntlClientProvider locale={locale} messages={messages}>
             <AuthProvider>
-              <Wrapper>
+              <Loader>
                 <div className="flex flex-col md:flex-row">
                   <Search />
                   <NotificationProvider />
@@ -53,7 +53,7 @@ export default async function RootLayout({
                   <Navbar />
                   {children}
                 </div>
-              </Wrapper>
+              </Loader>
             </AuthProvider>
           </NextIntlClientProvider>
         </StateProvider>

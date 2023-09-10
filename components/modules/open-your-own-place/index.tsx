@@ -1,23 +1,22 @@
 "use client";
-import Button from "@/components/ui/button";
-import ImageUpload from "../image-upload";
-import { FaPlus } from "react-icons/fa";
+import AuthRequired from "@/components/common/protected";
 import Title from "@/components/common/title";
-import toast from "react-hot-toast";
+import Button from "@/components/ui/button";
 import { useFormik } from "formik";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import ImageUpload from "../image-upload";
 import Loader from "@/components/layout/loader";
-import AuthRequired from "@/components/common/protected";
 
 const OpenYourOwnPlace = () => {
   const t = useTranslations("OpenYourPlace");
   const [isLoading, setIsLoading] = useState(false);
   const [image, setImage] = useState<string | null>("");
   const [bgImage, setBgImage] = useState<string | null>("");
-  const { data: session, status } = useSession();
+  const { data: session, status, update } = useSession();
 
   const router = useRouter();
   const formik = useFormik({
@@ -53,6 +52,7 @@ const OpenYourOwnPlace = () => {
               toast.success(t("success"));
               setImage("");
               setBgImage("");
+              update();
               router.push("/");
             } else {
               // daha sonra error mesajlarini api'dan al.
@@ -84,26 +84,14 @@ const OpenYourOwnPlace = () => {
       <Title text={t("open-your-own-place")} />
       <div className="grid grid-cols-4  flex-col">
         <div className="col-span-4 xl:col-span-3  bg-slate-50 h-[calc(100vh-120px)] p-4 flex flex-col gap-4">
-          <div className="flex items-center rounded-lg bg-white w-full h-[80px] p-[10px] md:p-0 md:h-[120px]">
-            <Button
-              variant={"primary"}
-              className="bg-slate-800 text-white text-2xl h-[120px] w-[120px] rounded-xl"
-            >
-              <FaPlus size={30} />
-            </Button>
+          <div className="flex items-center rounded-lg bg-white w-full  p-[10px] md:p-0 md:h-[100px]">
             <ImageUpload
               onChange={(image) => setImage(image)}
               text="Mekan için resim yükle (gerekli)"
               icon={false}
             />
           </div>
-          <div className="flex items-center rounded-lg bg-white w-full h-[80px] p-[10px] md:p-0 md:h-[120px]">
-            <Button
-              variant={"primary"}
-              className="bg-slate-800 text-white text-2xl h-[120px] w-[120px] rounded-xl"
-            >
-              <FaPlus size={30} />
-            </Button>
+          <div className="flex items-center rounded-lg bg-white w-full  p-[10px] md:p-0 md:h-[100px]">
             <ImageUpload
               onChange={(image) => setBgImage(image)}
               text="Mekan için arka plan resmi yükle (gerekli)"

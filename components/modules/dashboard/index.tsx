@@ -11,7 +11,6 @@ const Dashboard = () => {
   const t = useTranslations("Dashboard");
   const { data: session, status } = useSession();
   const { places }: any = session?.user || [];
-  console.log(session?.user);
 
   if (status !== "authenticated") {
     return <AuthRequired />;

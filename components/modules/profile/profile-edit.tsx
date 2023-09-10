@@ -70,7 +70,7 @@ const ProfileEdit = ({ setIsEditing }: Props) => {
         onSubmit={formik.handleSubmit}
         className="flex flex-col gap-6 p-2 py-10"
       >
-        <div className="col-span-2 px-2 rounded-xl border border-slate-400">
+        <div className="col-span-2  rounded-xl border border-slate-400">
           <ImageUpload onChange={(image) => setImage(image)} icon={false} />
         </div>
         <div className="w-full flex justify-between items-center ">
