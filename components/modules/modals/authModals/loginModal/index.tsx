@@ -115,7 +115,7 @@ const LoginModal = () => {
             </Button>
           </form>
           {/* social login */}
-          <div className="w-full flex flex-col items-center justify-start  col-span-2">
+          <div className="w-full flex flex-col items-center justify-start md:p-[20px] ">
             <p className="text-slate-700 font-semibold text-md"> {t("or")}</p>
             <div className="w-full flex items-center justify-between gap-2">
               <Button

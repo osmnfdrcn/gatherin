@@ -3,11 +3,13 @@ import { IUser } from "@/types";
 import { useState } from "react";
 import ProfileEdit from "./profile-edit";
 import UserCard from "./user-card";
+import { useSession } from "next-auth/react";
 type Props = {
   user: IUser;
 };
 const UserProfile = ({ user }: Props) => {
   const [isEditing, setIsEditing] = useState(false);
+  const { status } = useSession();
 
   return (
     <div className=" grid grid-cols-3 py-[8px] px-[10px] gap-8 ">

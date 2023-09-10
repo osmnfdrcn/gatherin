@@ -11,7 +11,7 @@ const Home = ({ places }: HomeProps) => {
   return (
     <section className=" w-full">
       <Banner />
-      <div className="px-4 my-2 md:my-4 flex justify-end">
+      <div className="w-full px-4 my-2 md:my-4 flex justify-end">
         <SearchInput />
       </div>
       <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-4 px-4 ">

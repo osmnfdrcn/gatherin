@@ -15,7 +15,7 @@ const SearchInput = () => {
   return (
     <Input
       placeholder={t("search")}
-      className="w-[260px] border-none bg-slate-100 rounded-full py-[20px] text-lg font-semibold text-slate-700 cursor-pointer "
+      className="w-full md:w-[260px] border-none bg-slate-100 rounded-full py-[20px] text-lg font-semibold text-slate-700 cursor-pointer "
       onClick={handleClick}
     />
   );

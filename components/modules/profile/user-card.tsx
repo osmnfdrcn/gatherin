@@ -45,7 +45,7 @@ const UserCard = ({ user, setIsEditing, isEditing }: Props) => {
           </Button>
         ) : null}
 
-        {ownProfile ? (
+        {ownProfile && status === "authenticated" ? (
           <p
             className="absolute top-2 right-2 font-semibold text-sm text-slate-600 cursor-pointer"
             onClick={() => setIsEditing(!isEditing)}

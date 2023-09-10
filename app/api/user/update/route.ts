@@ -1,8 +1,14 @@
 import { NextResponse } from "next/server";
 
 import prisma from "@/lib/prismadb";
+import getCurrentUser from "@/helpers/getCurrentUser";
 
 export async function POST(request: Request) {
+  const user = await getCurrentUser();
+  if (!user) {
+    return null;
+  }
+
   try {
     const body = await request.json();
     const { name, bio, image, id } = body;
