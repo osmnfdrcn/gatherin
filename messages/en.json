@@ -63,9 +63,15 @@
     "description": "Description(required)",
     "save": "Save",
     "close": "Close",
-    "auth-warning": "Please login to access the content",
+    "auth-warning": "Please login to access the content!",
     "open-your-own-place": "Open Your Own Place",
     "success": "Place Created!",
     "error": "Encountered an Error!"
+  },
+  "Dashboard": {
+    "dashboard": "Dashboard",
+    "edit-place": "Edit Place",
+    "edit-gatherings": "Edit Dates aand Times",
+    "bookings": "Reservations"
   }
 }

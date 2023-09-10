@@ -1,3 +1,4 @@
+import PageWrapper from "@/components/layout/page-wrapper";
 import React from "react";
 
 type Props = {
@@ -6,8 +7,12 @@ type Props = {
   };
 };
 
-const Bookings = ({ params: { slug } }: Props) => {
-  return <div>{slug}</div>;
+const page = ({ params: { slug } }: Props) => {
+  return (
+    <PageWrapper>
+      <div>{slug}</div>
+    </PageWrapper>
+  );
 };
 
-export default Bookings;
+export default page;

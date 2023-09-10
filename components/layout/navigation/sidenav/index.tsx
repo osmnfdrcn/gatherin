@@ -44,7 +44,7 @@ const SideNav = () => {
               </div>
             ) : null}
             <Menu />
-            <Button className="bg-yellow-200 rounded-lg mt-5 py-3  ">
+            <Button className="bg-yellow-300 rounded-lg mt-5 py-3  ">
               <div
                 className="flex items-center justify-start gap-2 w-full font-bold text-xl hover:text-steel-blue transition"
                 onClick={handleOpenYourPlaceClick}

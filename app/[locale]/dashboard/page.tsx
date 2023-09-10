@@ -1,9 +1,13 @@
-import React from "react";
+import Title from "@/components/common/title";
+import PageWrapper from "@/components/layout/page-wrapper";
+import Dashboard from "@/components/modules/dashboard";
 
-type Props = {};
-
-const Dashboard = (props: Props) => {
-  return <div>Dashboard</div>;
+const page = () => {
+  return (
+    <PageWrapper>
+      <Dashboard />
+    </PageWrapper>
+  );
 };
 
-export default Dashboard;
+export default page;

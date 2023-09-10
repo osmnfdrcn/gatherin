@@ -1,5 +1,5 @@
 "use client";
-import ImageUpload from "@/components/modules/imageUpload";
+import ImageUpload from "@/components/modules/image-upload";
 import Button from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useFormik } from "formik";
@@ -65,15 +65,15 @@ const ProfileEdit = ({ setIsEditing }: Props) => {
     },
   });
   return (
-    <div className="col-span-3 xl:col-span-2 py-[8px] px-[10px] rounded-xl  bg-slate-50 xl: h-[calc(100vh-120px)] shadow-lg">
+    <div className="col-span-3 xl:col-span-2  px-[10px] rounded-xl  bg-slate-50 xl: h-auto shadow-lg">
       <form
         onSubmit={formik.handleSubmit}
         className="flex flex-col gap-6 p-2 py-10"
       >
-        <div className="col-span-2 p-2 rounded-xl border border-slate-400">
+        <div className="col-span-2 px-2 rounded-xl border border-slate-400">
           <ImageUpload onChange={(image) => setImage(image)} icon={false} />
         </div>
-        <div className="w-full flex justify-between items-center gap-10">
+        <div className="w-full flex justify-between items-center ">
           <Input
             type="text"
             value={formik.values.name}
@@ -91,7 +91,7 @@ const ProfileEdit = ({ setIsEditing }: Props) => {
           className="bg-transparent placeholder:text-sm rounded-lg resize-none border-slate-400 test-sm font-light"
           placeholder="Bio"
         ></textarea>
-        <div className="flex gap-4 mt-6 justify-end">
+        <div className="flex gap-4 mt-2 justify-end">
           <Button
             type="submit"
             loading={isLoading}

@@ -6,6 +6,8 @@ import VideoConference from "@/components/modules/video-conference";
 import Button from "@/components/ui/button";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
+
 type Props = {
   id: string;
   place: IPlace;
@@ -35,9 +37,11 @@ const Place = ({ id, place }: Props) => {
           <div className=" text-2xl lg:text-6xl font-semibold p-0 lg:py-4 -tracking-wide">
             {place?.name}
           </div>
-          <p className="text-lg ">
-            {t("owner")} {place?.owner.name}
-          </p>
+          <Link href={`/users/${place.ownerId}`}>
+            <p className="text-lg ">
+              {t("owner")} {place?.owner.name}
+            </p>
+          </Link>
           <p className=" text-sm"> {place?.description}</p>
           {status === "authenticated" ? (
             <Button

@@ -1,6 +1,6 @@
 "use client";
 import Button from "@/components/ui/button";
-import ImageUpload from "../imageUpload";
+import ImageUpload from "../image-upload";
 import { FaPlus } from "react-icons/fa";
 import Title from "@/components/common/title";
 import toast from "react-hot-toast";
@@ -10,6 +10,7 @@ import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import Loader from "@/components/layout/loader";
+import AuthRequired from "@/components/common/protected";
 
 const OpenYourOwnPlace = () => {
   const t = useTranslations("OpenYourPlace");
@@ -75,17 +76,11 @@ const OpenYourOwnPlace = () => {
   };
 
   if (status !== "authenticated") {
-    return (
-      <div className=" p-4 text-lg text-rose-500 font-semibold">
-        {t("auth-warning")}
-      </div>
-    );
+    return <AuthRequired />;
   }
-  // if (isLoading) {
-  //   return <Loader />;
-  // }
+
   return (
-    <section className="px-4">
+    <>
       <Title text={t("open-your-own-place")} />
       <div className="grid grid-cols-4  flex-col">
         <div className="col-span-4 xl:col-span-3  bg-slate-50 h-[calc(100vh-120px)] p-4 flex flex-col gap-4">
@@ -161,7 +156,7 @@ const OpenYourOwnPlace = () => {
           </Button>
         </div>
       </div>
-    </section>
+    </>
   );
 };
 

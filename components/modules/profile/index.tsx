@@ -12,7 +12,7 @@ const UserProfile = ({ user }: Props) => {
   const { status } = useSession();
 
   return (
-    <div className=" grid grid-cols-3 py-[8px] px-[10px] gap-8 ">
+    <div className=" grid grid-cols-3 py-[8px] gap-8 ">
       <UserCard user={user} isEditing={isEditing} setIsEditing={setIsEditing} />
       {isEditing ? (
         <ProfileEdit setIsEditing={setIsEditing} />

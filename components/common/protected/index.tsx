@@ -1,21 +1,20 @@
 "use client";
+import { useTranslations } from "next-intl";
+import { ImWarning } from "react-icons/im";
 
-import { setShowLoginModal } from "@/store/slices/appSlice";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import React from "react";
-import { useDispatch } from "react-redux";
+const AuthRequired = () => {
+  const t = useTranslations("OpenYourPlace");
 
-type Props = {
-  children: React.ReactNode;
+  return (
+    <div className="w-full bg-slate-100 flex items-center justify-center p-10 mt-4 rounded-lg">
+      <div className="flex flex-col items-center justify-center gap-4">
+        <ImWarning size={40} />
+        <p className="text-slate-800 font-semibold text-2xl text-center">
+          {t("auth-warning")}
+        </p>
+      </div>
+    </div>
+  );
 };
 
-const AuthCheck = ({ children }: Props) => {
-  const { data: session } = useSession();
-  const dispatch = useDispatch();
-  const router = useRouter();
-  !session ? dispatch(setShowLoginModal(true)) : null;
-  return children;
-};
-
-export default AuthCheck;
+export default AuthRequired;

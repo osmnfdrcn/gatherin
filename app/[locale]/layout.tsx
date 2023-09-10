@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "@/components/layout/navigation";
-import LoginModal from "@/components/modules/modals/authModals/loginModal";
-import RegisterModal from "@/components/modules/modals/authModals/registerModal";
+import LoginModal from "@/components/modules/modals/auth-modals/login";
+import RegisterModal from "@/components/modules/modals/auth-modals/register";
 import AuthProvider from "@/providers/AuthProvider";
 import NotificationProvider from "@/providers/NotificationProvider";
 import { StateProvider } from "@/providers/StateProvider";

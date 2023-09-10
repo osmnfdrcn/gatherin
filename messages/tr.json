@@ -67,5 +67,11 @@
     "open-your-own-place": "Kendi Mekanini Ac",
     "success": "Mekan Olusturuldu!",
     "error": "Bir sorun ile karsilasildi!"
+  },
+  "Dashboard": {
+    "dashboard": "Gosterge Tablosu",
+    "edit-place": "Mekan Sayfasini Duzenle",
+    "edit-gatherings": "Tarihleri Duzenle",
+    "bookings": "Rezervasyonlar"
   }
 }

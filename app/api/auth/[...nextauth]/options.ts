@@ -23,6 +23,14 @@ export const options: NextAuthOptions = {
           where: {
             email: credentials.email,
           },
+          include: {
+            places: {
+              select: {
+                name: true,
+                id: true,
+              },
+            },
+          },
         });
 
         if (!user || !user?.hashedPassword) {
