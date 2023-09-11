@@ -39,10 +39,14 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const search = searchParams.get("search");
   const id = searchParams.get("id");
+  const ownerId = searchParams.get("ownerId");
 
   let query: any = {};
   search ? (query.name = { contains: search, mode: "insensitive" }) : null;
   id ? (query.id = id) : null;
+  ownerId ? (query.ownerId = ownerId) : null;
+
+  console.log({ query });
 
   try {
     const places = await prisma.place.findMany({

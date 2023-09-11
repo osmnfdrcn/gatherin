@@ -67,7 +67,8 @@
     "open-your-own-place": "Open Your Own Place",
     "update-place": "Update Place Info",
     "success": "Place Created!",
-    "error": "Encountered an Error!"
+    "error": "Encountered an Error!",
+    "access-denied": "Access Denied"
   },
   "Dashboard": {
     "dashboard": "Dashboard",
