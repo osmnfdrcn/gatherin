@@ -2,27 +2,36 @@
 import AuthRequired from "@/components/common/protected";
 import Title from "@/components/common/title";
 import Button from "@/components/ui/button";
+import { IPlace } from "@/types";
 import { useFormik } from "formik";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import ImageUpload from "../image-upload";
-import Loader from "@/components/layout/loader";
 
-const OpenYourOwnPlace = () => {
-  const t = useTranslations("OpenYourPlace");
+type Props = {
+  placeId?: string;
+};
+const OpenYourOwnPlace = ({ placeId }: Props) => {
+  const [place, setPlace] = useState<IPlace | null>(null);
+  const [image, setImage] = useState<string>("");
+  const [bgImage, setBgImage] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
-  const [image, setImage] = useState<string | null>("");
-  const [bgImage, setBgImage] = useState<string | null>("");
+
+  const t = useTranslations("OpenYourPlace");
+
   const { data: session, status, update } = useSession();
+  const url = ` ${process.env.NEXT_PUBLIC_SITE_URL}/api/place/${
+    place ? "update" : "create"
+  }`;
 
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
-      name: "",
-      description: "",
+      name: place?.name,
+      description: place?.description,
       labels: "",
     },
     onSubmit: async () => {
@@ -30,6 +39,7 @@ const OpenYourOwnPlace = () => {
       const { name, description } = formik.values;
       try {
         const data = {
+          id: place?.id,
           name,
           description,
           image,
@@ -38,9 +48,10 @@ const OpenYourOwnPlace = () => {
         };
 
         const requestOptions: RequestInit = {
-          method: "POST",
+          method: placeId ? "PATCH" : "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data),
+          cache: "no-cache",
         };
 
         await fetch(
@@ -49,20 +60,18 @@ const OpenYourOwnPlace = () => {
         )
           .then((res) => {
             if (res?.ok) {
-              toast.success(t("success"));
               setImage("");
               setBgImage("");
-              update();
-              router.push("/");
+              !placeId ? router.push("/") : router.push("/dashboard");
             } else {
-              // daha sonra error mesajlarini api'dan al.
               toast.error(t("error"));
             }
           })
           .catch((error) => {
             toast.error(t("error"));
           })
-          .finally(() => {
+          .finally(async () => {
+            await update();
             formik.resetForm();
             setIsLoading(false);
           });
@@ -72,20 +81,38 @@ const OpenYourOwnPlace = () => {
 
   const isButtonDisabled = () => {
     const { name, description } = formik.values;
-    return !name || !description || !image || !bgImage || isLoading;
+    if (!placeId) {
+      return !name || !description || !image || !bgImage || isLoading;
+    } else {
+      return isLoading;
+    }
   };
 
   if (status !== "authenticated") {
     return <AuthRequired />;
   }
+  const memoizedPlace = useMemo(() => place, []);
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/place/?id=${placeId}`, {
+      cache: "no-cache",
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        setPlace(res[0]);
+        setBgImage(res[0].bgImage);
+        setImage(res[0].image);
+      });
+  }, [memoizedPlace]);
+  useEffect(() => console.log("rendered"));
 
   return (
     <>
-      <Title text={t("open-your-own-place")} />
+      <Title text={place ? t("update-place") : t("open-your-own-place")} />
       <div className="grid grid-cols-4  flex-col">
         <div className="col-span-4 xl:col-span-3  bg-slate-50 h-[calc(100vh-120px)] p-4 flex flex-col gap-4">
           <div className="flex items-center rounded-lg bg-white w-full  p-[10px] md:p-0 md:h-[100px]">
             <ImageUpload
+              image={image}
               onChange={(image) => setImage(image)}
               text="Mekan için resim yükle (gerekli)"
               icon={false}
@@ -93,6 +120,7 @@ const OpenYourOwnPlace = () => {
           </div>
           <div className="flex items-center rounded-lg bg-white w-full  p-[10px] md:p-0 md:h-[100px]">
             <ImageUpload
+              image={bgImage}
               onChange={(image) => setBgImage(image)}
               text="Mekan için arka plan resmi yükle (gerekli)"
               icon={false}
@@ -104,7 +132,7 @@ const OpenYourOwnPlace = () => {
           >
             <div className="flex items-center rounded-lg bg-white w-full h-[80px] p-[10px] md:p-0 md:h-[120px]">
               <textarea
-                value={formik.values.name}
+                value={formik.values.name || place?.name}
                 name="name"
                 onChange={formik.handleChange}
                 rows={5}
@@ -114,7 +142,7 @@ const OpenYourOwnPlace = () => {
             </div>
             <div className="flex items-center rounded-lg bg-white w-full h-[80px] p-[10px] md:p-0 md:h-[120px]">
               <textarea
-                value={formik.values.description}
+                value={formik.values.description || place?.description}
                 name="description"
                 onChange={formik.handleChange}
                 rows={5}

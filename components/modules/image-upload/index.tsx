@@ -17,19 +17,21 @@ interface ImageUploadProps {
   onChange: (value: string) => void;
   text?: string;
   icon: boolean;
+  image?: string;
 }
 
 const ImageUpload = ({
   onChange,
   text = "* Upload drag and drop SVG, PNG, JPG",
   icon = true,
+  image,
 }: ImageUploadProps) => {
-  const [images, setImages] = useState<string[]>([]);
+  const [images, setImages] = useState<string>(image || "");
   const t = useTranslations("User");
 
   const handleUpload = useCallback(
     (result: any) => {
-      const updatedImages = [result.info.secure_url];
+      const updatedImages = result.info.secure_url;
       setImages(updatedImages);
       onChange(result.info.secure_url);
     },
@@ -59,11 +61,11 @@ const ImageUpload = ({
             ) : null}
 
             <div className="absolute top-0 left-0  w-[100px] h-[100px] flex items-center justify-between ">
-              {images.length ? (
+              {images || image ? (
                 <Image
                   fill
                   style={{ objectFit: "cover" }}
-                  src={images[0] || "/images/imageUpload.png"}
+                  src={image || images || "/images/imageUpload.png"}
                   alt=""
                   className="rounded-full p-1"
                 />

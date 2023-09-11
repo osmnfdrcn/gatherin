@@ -6,15 +6,21 @@ import { IPlace } from "@/types";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import { useState } from "react";
 
 const Dashboard = () => {
   const t = useTranslations("Dashboard");
+  const [places, setPlaces] = useState<IPlace[] | null>(null);
+
+  fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/place`, { cache: "no-cache" })
+    .then((res) => res.json())
+    .then((res) => setPlaces(res));
   const { data: session, status } = useSession();
-  const { places }: any = session?.user || [];
 
   if (status !== "authenticated") {
     return <AuthRequired />;
   }
+
   return (
     <div className=" md:px-8 py-6 flex flex-col gap-4">
       <Title text={t("dashboard")} />

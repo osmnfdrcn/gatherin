@@ -65,6 +65,7 @@
     "close": "Close",
     "auth-warning": "Please login to access the content!",
     "open-your-own-place": "Open Your Own Place",
+    "update-place": "Update Place Info",
     "success": "Place Created!",
     "error": "Encountered an Error!"
   },

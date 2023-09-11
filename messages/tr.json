@@ -65,6 +65,8 @@
     "close": "Kapat",
     "auth-warning": "Icerige erismek icin giris yapin!",
     "open-your-own-place": "Kendi Mekanini Ac",
+    "update-place": "Mekan Bilgisini Guncelle",
+
     "success": "Mekan Olusturuldu!",
     "error": "Bir sorun ile karsilasildi!"
   },
