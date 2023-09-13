@@ -62,7 +62,7 @@ const PlaceManager = ({ placeId }: Props) => {
             if (res?.ok) {
               setImage("");
               setBgImage("");
-              !placeId ? router.push("/") : router.push("/dashboard");
+              !placeId ? router.push("/dashboard") : router.push("/dashboard");
             } else {
               toast.error(t("error"));
             }
@@ -93,20 +93,22 @@ const PlaceManager = ({ placeId }: Props) => {
   }
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/place/?id=${placeId}`, {
-      cache: "no-cache",
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        setPlace(res[0]);
-        setBgImage(res[0].bgImage);
-        setImage(res[0].image);
-      });
+    if (placeId) {
+      fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/place/?id=${placeId}`, {
+        cache: "no-cache",
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          setPlace(res[0]);
+          setBgImage(res[0].bgImage);
+          setImage(res[0].image);
+        });
+    }
   }, []);
 
   const isOwnerOfPlace = session.user.id === place?.ownerId;
 
-  if (isOwnerOfPlace) {
+  if (isOwnerOfPlace || !place) {
     return (
       <>
         <Title text={place ? t("update-place") : t("open-your-own-place")} />
