@@ -1,10 +1,10 @@
 import PageWrapper from "@/components/layout/page-wrapper";
-import OpenYourOwnPlace from "@/components/modules/open-your-own-place";
+import PlaceManager from "@/components/modules/place-manager";
 
 const OpenPage = async () => {
   return (
     <PageWrapper>
-      <OpenYourOwnPlace />;
+      <PlaceManager />;
     </PageWrapper>
   );
 };

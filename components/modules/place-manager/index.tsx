@@ -14,7 +14,7 @@ import ImageUpload from "../image-upload";
 type Props = {
   placeId?: string;
 };
-const OpenYourOwnPlace = ({ placeId }: Props) => {
+const PlaceManager = ({ placeId }: Props) => {
   const [place, setPlace] = useState<IPlace | null>(null);
   const [image, setImage] = useState<string>("");
   const [bgImage, setBgImage] = useState<string>("");
@@ -105,6 +105,7 @@ const OpenYourOwnPlace = ({ placeId }: Props) => {
   }, []);
 
   const isOwnerOfPlace = session.user.id === place?.ownerId;
+
   if (isOwnerOfPlace) {
     return (
       <>
@@ -178,4 +179,4 @@ const OpenYourOwnPlace = ({ placeId }: Props) => {
   }
 };
 
-export default OpenYourOwnPlace;
+export default PlaceManager;

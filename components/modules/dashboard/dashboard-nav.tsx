@@ -17,9 +17,9 @@ const DashboardNav = ({ placeId }: { placeId: string }) => {
       {menu.map((m) => (
         <Link key={m.id} href={`/dashboard/${placeId}/${m.link}`}>
           <p
-            className={`p-2 rounded-lg text-xs md:text-sm font-semibold cursor-pointer  ${
+            className={`p-2 rounded-lg text-xs md:text-sm font-semibold cursor-pointer leading-2 ${
               segment === m.link
-                ? "text-steel-blue underline underline-offset-8 decoration-2"
+                ? "text-steel-blue underline underline-offset-2 decoration-2"
                 : "text-slate-700"
             }`}
           >

@@ -1,5 +1,4 @@
-import OpenYourOwnPlace from "@/components/modules/open-your-own-place";
-import { IPlace } from "@/types";
+import PlaceManager from "@/components/modules/place-manager";
 
 // const getPlace = async (id: string): Promise<IPlace> => {
 //   const data = await fetch(
@@ -18,8 +17,7 @@ type Props = {
 
 const page = async ({ params: { id } }: Props) => {
   // const place = await getPlace(id);
-
-  return <OpenYourOwnPlace placeId={id} />;
+  return <PlaceManager placeId={id} />;
 };
 
 export default page;

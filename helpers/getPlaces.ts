@@ -5,6 +5,7 @@ export const getPlaces = async () => {
     const places = await prisma.place.findMany({
       include: {
         owner: true,
+        gatherings: true,
       },
     });
 

@@ -68,12 +68,37 @@
     "update-place": "Update Place Info",
     "success": "Place Created!",
     "error": "Encountered an Error!",
-    "access-denied": "Access Denied"
+    "access-denied": "Access Denied",
+    "no-access": "You're not allowed to access this page!"
   },
   "Dashboard": {
     "dashboard": "Dashboard",
     "edit-place": "Edit Place",
-    "edit-gatherings": "Edit Dates aand Times",
+    "edit-gatherings": "Edit Dates and Times",
     "bookings": "Reservations"
+  },
+  "Gathering": {
+    "success": "Event Created!",
+    "error": "Encountered an Error!",
+
+    "add-new-date": "Add New Date",
+    "add-opening": "Add Opening Date & Time",
+    "save": "Save",
+    "description": "Description",
+    "join": "Join"
+  },
+  "Months": {
+    "January": "January",
+    "February": "February",
+    "March": "March",
+    "April": "April",
+    "May": "May",
+    "June": "June",
+    "July": "July",
+    "August": "August",
+    "September": "September",
+    "October": "October",
+    "November": "November",
+    "December": "December"
   }
 }

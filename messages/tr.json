@@ -68,12 +68,37 @@
     "update-place": "Mekan Bilgisini Guncelle",
     "success": "Mekan Olusturuldu!",
     "error": "Bir sorun ile karsilasildi!",
-    "access-denied": "Erisiminiz Yok"
+    "access-denied": "Erisiminiz Yok",
+    "no-access": "Bu sayfaya erisim yetkiniz yok!"
   },
   "Dashboard": {
     "dashboard": "Gosterge Tablosu",
     "edit-place": "Mekan Sayfasini Duzenle",
     "edit-gatherings": "Tarihleri Duzenle",
     "bookings": "Rezervasyonlar"
+  },
+  "Gathering": {
+    "success": "Oturum Olusturuldu!",
+    "error": "Bir sorun ile karsilasildi!",
+    "no-access": "Bu sayfaya erisim yetkiniz yok!",
+    "add-new-date": "Yeni Tarih Ekle",
+    "add-opening": "Buluşma Tarihi ve Saati Ekle",
+    "save": "Kaydet",
+    "description": "Aciklama",
+    "join": "Katil"
+  },
+  "Months": {
+    "January": "Ocak",
+    "February": "Subat",
+    "March": "Mart",
+    "April": "Nisan",
+    "May": "Mayis",
+    "June": "Haziran",
+    "July": "Temmuz",
+    "August": "Agustos",
+    "September": "Eylul",
+    "October": "Ekim",
+    "November": "Kasim",
+    "December": "Aralik"
   }
 }

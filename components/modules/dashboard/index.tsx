@@ -1,6 +1,7 @@
 "use client";
 import AuthRequired from "@/components/common/protected";
 import Title from "@/components/common/title";
+import Spinner from "@/components/layout/spinner";
 import Button from "@/components/ui/button";
 import { IPlace } from "@/types";
 import { useSession } from "next-auth/react";
@@ -11,9 +12,11 @@ import { useEffect, useState } from "react";
 const Dashboard = () => {
   const t = useTranslations("Dashboard");
   const [places, setPlaces] = useState<IPlace[] | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const { data: session, status } = useSession();
 
   useEffect(() => {
+    setIsLoading(true);
     fetch(
       `${process.env.NEXT_PUBLIC_SITE_URL}/api/place/?ownerId=${session?.user.id}`,
       {
@@ -21,13 +24,21 @@ const Dashboard = () => {
       }
     )
       .then((res) => res.json())
-      .then((res) => setPlaces(res));
+      .then((res) => setPlaces(res))
+      .catch(() => {})
+      .finally(() => setIsLoading(false));
   }, []);
 
   if (status !== "authenticated") {
     return <AuthRequired />;
   }
-
+  if (isLoading) {
+    return (
+      <div className="w-full h-[400px]">
+        <Spinner />
+      </div>
+    );
+  }
   return (
     <div className=" md:px-8 py-6 flex flex-col gap-4">
       <Title text={t("dashboard")} />

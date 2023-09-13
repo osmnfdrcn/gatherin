@@ -8,6 +8,7 @@ export const getPlaceById = async (id: string) => {
       },
       include: {
         owner: true,
+        gatherings: true,
       },
     });
     if (!place) return null;

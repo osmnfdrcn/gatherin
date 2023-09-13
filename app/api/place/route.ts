@@ -5,13 +5,14 @@ import getCurrentUser from "@/helpers/getCurrentUser";
 
 export async function POST(request: Request) {
   const user = await getCurrentUser();
-  if (!user) {
+  const body = await request.json();
+  const { name, description, image, bgImage, userId } = body;
+
+  if (!user || user.id !== userId) {
     return null;
   }
 
   try {
-    const body = await request.json();
-    const { name, description, image, bgImage, userId } = body;
     if (!description || !name || !image || !bgImage || !userId) {
       return new NextResponse("Missing Fields", { status: 400 });
     }
@@ -46,13 +47,12 @@ export async function GET(request: Request) {
   id ? (query.id = id) : null;
   ownerId ? (query.ownerId = ownerId) : null;
 
-  console.log({ query });
-
   try {
     const places = await prisma.place.findMany({
       where: query,
       include: {
         owner: true,
+        gatherings: true,
       },
     });
 

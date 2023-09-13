@@ -5,7 +5,8 @@ import { useTranslations } from "next-intl";
 import { IUser } from "@/types";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-
+import { Gathering } from "@prisma/client";
+import isAfter from "date-fns/isAfter";
 type Props = {
   image: string;
   owner: string;
@@ -43,3 +44,11 @@ const Card = ({ image, owner, ownerId, name, placeId }: Props) => {
 };
 
 export default Card;
+
+[
+  { start: "2023-10-16T15:00:00.000Z", name: "dsadas" },
+  { start: "2023-10-12T15:00:00.000Z", name: "dsadas" },
+  { start: "2023-10-111T15:00:00.000Z", name: "dsadas" },
+  { start: "2023-10-14T15:00:00.000Z", name: "dsadas" },
+  { start: "2023-10-13T15:00:00.000Z", name: "dsadas" },
+];
