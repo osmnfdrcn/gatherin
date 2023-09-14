@@ -2,68 +2,15 @@
 import ImageUpload from "@/components/modules/image-upload";
 import Button from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useFormik } from "formik";
-import { useSession } from "next-auth/react";
-import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import toast from "react-hot-toast";
+import useProfileEdit from "./useProfileEdit";
+
 type Props = {
   setIsEditing: (v: boolean) => void;
 };
 
 const ProfileEdit = ({ setIsEditing }: Props) => {
-  const t = useTranslations("User");
-  const { data: session } = useSession();
-  const [image, setImage] = useState<string | null>(session?.user.image || "");
-  const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
+  const { formik, setImage, t, isLoading } = useProfileEdit(setIsEditing);
 
-  const formik = useFormik({
-    initialValues: {
-      name: "",
-      bio: "",
-    },
-    onSubmit: async () => {
-      setIsLoading(true);
-      const { name, bio } = formik.values;
-      try {
-        const data = {
-          name,
-          bio,
-          image,
-          id: session?.user.id,
-        };
-
-        const requestOptions: RequestInit = {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        };
-
-        await fetch(
-          `${process.env.NEXT_PUBLIC_SITE_URL}/api/user/update`,
-          requestOptions
-        )
-          .then((res) => {
-            if (res?.ok) {
-              toast.success(t("success"));
-              router.refresh();
-            } else {
-              toast.error(t("error"));
-            }
-          })
-          .catch((error) => {
-            toast.error(t("error"));
-          })
-          .finally(() => {
-            formik.resetForm();
-            setIsLoading(false);
-            setIsEditing(false);
-          });
-      } catch (error) {}
-    },
-  });
   return (
     <div className="col-span-3 xl:col-span-2  px-[10px] rounded-xl  bg-slate-50 xl: h-auto shadow-lg">
       <form
