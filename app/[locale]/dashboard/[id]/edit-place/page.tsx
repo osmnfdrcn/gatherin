@@ -1,4 +1,4 @@
-import PlaceManager from "@/components/modules/place-manager";
+import EditPlace from "@/components/modules/dashboard/edit-place";
 
 // const getPlace = async (id: string): Promise<IPlace> => {
 //   const data = await fetch(
@@ -17,7 +17,7 @@ type Props = {
 
 const page = async ({ params: { id } }: Props) => {
   // const place = await getPlace(id);
-  return <PlaceManager placeId={id} />;
+  return <EditPlace placeId={id} />;
 };
 
 export default page;

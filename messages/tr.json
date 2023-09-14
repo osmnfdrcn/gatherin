@@ -63,7 +63,6 @@
     "description": "Aciklama(gerekli)",
     "save": "Kaydet",
     "close": "Kapat",
-    "auth-warning": "Icerige erismek icin giris yapin!",
     "open-your-own-place": "Kendi Mekanini Ac",
     "update-place": "Mekan Bilgisini Guncelle",
     "success": "Mekan Olusturuldu!",
@@ -100,5 +99,9 @@
     "October": "Ekim",
     "November": "Kasim",
     "December": "Aralik"
+  },
+  "Warning": {
+    "404": "Aradiginiz Sayfa Bulunamadi",
+    "auth-warning": "Icerige erismek icin giris yapin!"
   }
 }

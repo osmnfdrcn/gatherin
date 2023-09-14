@@ -63,7 +63,6 @@
     "description": "Description(required)",
     "save": "Save",
     "close": "Close",
-    "auth-warning": "Please login to access the content!",
     "open-your-own-place": "Open Your Own Place",
     "update-place": "Update Place Info",
     "success": "Place Created!",
@@ -100,5 +99,9 @@
     "October": "October",
     "November": "November",
     "December": "December"
+  },
+  "Warning": {
+    "404": "Page not found",
+    "auth-warning": "Please login to access the content!"
   }
 }

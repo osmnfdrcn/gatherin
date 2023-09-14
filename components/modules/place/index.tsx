@@ -1,15 +1,14 @@
 "use client";
-import React, { useState } from "react";
-import Image from "next/image";
-import { IPlace } from "@/types";
 import VideoConference from "@/components/modules/video-conference";
 import Button from "@/components/ui/button";
+import { IPlace } from "@/types";
+import { Gathering } from "@prisma/client";
+import isAfter from "date-fns/isAfter";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import Link from "next/link";
-import isBefore from "date-fns/isBefore";
-import isAfter from "date-fns/isAfter";
-import { Gathering } from "@prisma/client";
+import { useState } from "react";
 
 type Props = {
   id: string;
@@ -34,9 +33,10 @@ const Place = ({ id, place }: Props) => {
     "December",
   ];
 
-  const gatherings = place.gatherings.sort(
+  const gatherings = place?.gatherings.sort(
     (a, b) => Number(a.start) - Number(b.start)
   );
+
   return (
     <div className="w-full  bg-slate-100 p-3 md:p-10 mt-2 rounded-lg">
       <div className="flex flex-col lg:grid grid-cols-3 gap-4 mb-8">
@@ -53,7 +53,7 @@ const Place = ({ id, place }: Props) => {
           <div className=" text-2xl lg:text-6xl font-semibold p-0 lg:py-4 -tracking-wide">
             {place?.name}
           </div>
-          <Link href={`/users/${place.ownerId}`}>
+          <Link href={`/users/${place?.ownerId}`}>
             <p className="text-lg ">
               {t("owner")} {place?.owner.name}
             </p>

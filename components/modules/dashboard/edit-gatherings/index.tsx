@@ -1,5 +1,5 @@
 "use client";
-import AuthRequired from "@/components/common/protected";
+import AuthRequired from "@/components/common/warning";
 import Title from "@/components/common/title";
 import Button from "@/components/ui/button";
 import DatePicker from "@/components/ui/datepicker";
@@ -11,6 +11,7 @@ import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import Warning from "@/components/common/warning";
 type Props = {
   placeId: string;
 };
@@ -30,9 +31,10 @@ const EditGatherings = ({ placeId }: Props) => {
   let [hours, minutes] = time.split(":");
   const end = addMinutes(start, duration);
   const data = { start, end, userId: session?.user.id, placeId, description };
+  const [error, setError] = useState(false);
 
   if (status !== "authenticated") {
-    return <AuthRequired />;
+    return <Warning text="auth-warning" />;
   }
   const handleClick = () => {
     setIsLoading(true);
@@ -67,11 +69,16 @@ const EditGatherings = ({ placeId }: Props) => {
       .then((res) => res.json())
       .then((res) => {
         setPlace(res[0]);
-      });
+      })
+      .catch(() => setError(true));
   }, []);
 
+  if (error) {
+    return <Warning text="404" />;
+  }
+
   const isOwnerOfPlace = session.user.id === place?.ownerId;
-  if (isOwnerOfPlace) {
+  if (isOwnerOfPlace && !error) {
     return (
       <div className="w-full p-4 bg-slate-100 h-auto ">
         {isEditing ? (

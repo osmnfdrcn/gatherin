@@ -1,5 +1,5 @@
 "use client";
-import AuthRequired from "@/components/common/protected";
+import AuthRequired from "@/components/common/warning";
 import Title from "@/components/common/title";
 import Spinner from "@/components/layout/spinner";
 import Button from "@/components/ui/button";
@@ -8,6 +8,7 @@ import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Warning from "@/components/common/warning";
 
 const Dashboard = () => {
   const t = useTranslations("Dashboard");
@@ -30,7 +31,7 @@ const Dashboard = () => {
   }, []);
 
   if (status !== "authenticated") {
-    return <AuthRequired />;
+    return <Warning text="auth-warning" />;
   }
   if (isLoading) {
     return (

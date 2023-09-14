@@ -55,7 +55,7 @@ const ImageUpload = ({
           >
             {icon ? <TbPhotoPlus size={20} /> : null}
             {!images.length ? (
-              <div className="w-full font-semibold text-sm flex justify-center">
+              <div className="w-full font-semibold text-sm flex justify-end md:justify-center">
                 {t("upload")}
               </div>
             ) : null}

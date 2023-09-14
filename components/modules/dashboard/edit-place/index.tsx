@@ -1,112 +1,49 @@
 "use client";
-import AuthRequired from "@/components/common/protected";
 import Title from "@/components/common/title";
+import Warning from "@/components/common/warning";
+import Spinner from "@/components/layout/spinner";
 import Button from "@/components/ui/button";
-import { IPlace } from "@/types";
-import { useFormik } from "formik";
-import { useSession } from "next-auth/react";
-import { useTranslations } from "next-intl";
+import ImageUpload from "../../image-upload";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
-import toast from "react-hot-toast";
-import ImageUpload from "../image-upload";
+import { useTranslations } from "next-intl";
+import { useEditPlace } from "./useEditPlace";
+// import { useEditPlace } from "./useEditPlace";
 
 type Props = {
-  placeId?: string;
+  placeId: string;
 };
-const PlaceManager = ({ placeId }: Props) => {
-  const [place, setPlace] = useState<IPlace | null>(null);
-  const [image, setImage] = useState<string>("");
-  const [bgImage, setBgImage] = useState<string>("");
-  const [isLoading, setIsLoading] = useState(false);
-
-  const t = useTranslations("OpenYourPlace");
-
-  const { data: session, status, update } = useSession();
-  const url = ` ${process.env.NEXT_PUBLIC_SITE_URL}/api/place/${
-    place ? "update" : "create"
-  }`;
-
-  const router = useRouter();
-  const formik = useFormik({
-    initialValues: {
-      name: place?.name,
-      description: place?.description,
-      labels: "",
-    },
-    onSubmit: async () => {
-      setIsLoading(true);
-      const { name, description } = formik.values;
-      try {
-        const data = {
-          id: place?.id,
-          name,
-          description,
-          image,
-          bgImage,
-          userId: session?.user.id,
-        };
-
-        const requestOptions: RequestInit = {
-          method: placeId ? "PATCH" : "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-          cache: "no-cache",
-        };
-
-        await fetch(
-          `${process.env.NEXT_PUBLIC_SITE_URL}/api/place`,
-          requestOptions
-        )
-          .then((res) => {
-            if (res?.ok) {
-              setImage("");
-              setBgImage("");
-              !placeId ? router.push("/dashboard") : router.push("/dashboard");
-            } else {
-              toast.error(t("error"));
-            }
-          })
-          .catch((error) => {
-            toast.error(t("error"));
-          })
-          .finally(async () => {
-            await update();
-            formik.resetForm();
-            setIsLoading(false);
-          });
-      } catch (error) {}
-    },
-  });
-
-  const isButtonDisabled = () => {
-    const { name, description } = formik.values;
-    if (!placeId) {
-      return !name || !description || !image || !bgImage || isLoading;
-    } else {
-      return isLoading;
-    }
-  };
+const EditPlace = ({ placeId }: Props) => {
+  const {
+    place,
+    error,
+    isLoading,
+    isOwnerOfPlace,
+    image,
+    setImage,
+    bgImage,
+    setBgImage,
+    formik,
+    isButtonDisabled,
+    status,
+    router,
+    t,
+  } = useEditPlace(placeId);
 
   if (status !== "authenticated") {
-    return <AuthRequired />;
+    return <Warning text="auth-warning" />;
   }
 
-  useEffect(() => {
-    if (placeId) {
-      fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/place/?id=${placeId}`, {
-        cache: "no-cache",
-      })
-        .then((res) => res.json())
-        .then((res) => {
-          setPlace(res[0]);
-          setBgImage(res[0].bgImage);
-          setImage(res[0].image);
-        });
-    }
-  }, []);
+  if (error) {
+    return <Warning text="404" />;
+  }
 
-  const isOwnerOfPlace = session.user.id === place?.ownerId;
+  if (isLoading) {
+    return (
+      <div className="w-full h-[500px]">
+        <Spinner />
+      </div>
+    );
+  }
 
   if (isOwnerOfPlace || !place) {
     return (
@@ -136,7 +73,7 @@ const PlaceManager = ({ placeId }: Props) => {
             >
               <div className="flex items-center rounded-lg bg-white w-full h-[80px] p-[10px] md:p-0 md:h-[120px]">
                 <textarea
-                  value={formik.values.name || place?.name}
+                  value={formik.values.name}
                   name="name"
                   onChange={formik.handleChange}
                   rows={5}
@@ -146,7 +83,7 @@ const PlaceManager = ({ placeId }: Props) => {
               </div>
               <div className="flex items-center rounded-lg bg-white w-full h-[80px] p-[10px] md:p-0 md:h-[120px]">
                 <textarea
-                  value={formik.values.description || place?.description}
+                  value={formik.values.description}
                   name="description"
                   onChange={formik.handleChange}
                   rows={5}
@@ -181,4 +118,4 @@ const PlaceManager = ({ placeId }: Props) => {
   }
 };
 
-export default PlaceManager;
+export default EditPlace;

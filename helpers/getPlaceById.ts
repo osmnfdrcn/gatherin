@@ -11,7 +11,9 @@ export const getPlaceById = async (id: string) => {
         gatherings: true,
       },
     });
-    if (!place) return null;
+    if (!place) {
+      throw new Error("Place not found");
+    }
     return place;
   } catch (error) {
     return null;
