@@ -1,67 +1,21 @@
 "use client";
 import Button from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  setShowLoginModal,
-  setShowRegisterModal,
-} from "@/store/slices/appSlice";
-import { RootState, useAppDispatch, useAppSelector } from "@/store/store";
-import { useFormik } from "formik";
+import { setShowLoginModal } from "@/store/slices/appSlice";
 import { signIn } from "next-auth/react";
-import { useTranslations } from "next-intl";
-import React, { useState } from "react";
-import toast from "react-hot-toast";
 import { IoCloseSharp } from "react-icons/io5";
+import useLogin from "./useLogin";
 
 const LoginModal = () => {
-  const t = useTranslations("Auth");
-  const dispatch = useAppDispatch();
-  const { showLoginModal } = useAppSelector((store: RootState) => store.app);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleSubmit = (e: React.KeyboardEvent<HTMLInputElement>) => {};
-  const handleSignUpClick = () => {
-    dispatch(setShowLoginModal(false));
-    dispatch(setShowRegisterModal(true));
-  };
-
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-    },
-    onSubmit: async () => {
-      setIsLoading(true);
-      const { email, password } = formik.values;
-      try {
-      } catch (error) {}
-      signIn("credentials", {
-        email: email.toLowerCase(),
-        password,
-        redirect: false,
-      })
-        .then((callback) => {
-          setIsLoading(false);
-          dispatch(setShowLoginModal(false));
-
-          if (!callback?.error) {
-            toast.success("Giris basarili!");
-          }
-          if (callback?.error) {
-            toast.error(callback.error);
-          }
-        })
-        .finally(() => {
-          dispatch(setShowLoginModal(false));
-          setIsLoading(false);
-          formik.resetForm();
-        });
-    },
-  });
-  const isButtonDisabled = () => {
-    const { email, password } = formik.values;
-    return !email || !password || isLoading;
-  };
+  const {
+    showLoginModal,
+    formik,
+    t,
+    isLoading,
+    isButtonDisabled,
+    handleSignUpClick,
+    dispatch,
+  } = useLogin();
 
   if (showLoginModal) {
     return (

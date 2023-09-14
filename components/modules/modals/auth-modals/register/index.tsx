@@ -2,88 +2,20 @@
 
 import Button from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  setShowLoginModal,
-  setShowRegisterModal,
-} from "@/store/slices/appSlice";
-import { RootState, useAppDispatch, useAppSelector } from "@/store/store";
-import { useTranslations } from "next-intl";
-import React, { useState } from "react";
-import { IoCloseSharp } from "react-icons/io5";
-import { useFormik } from "formik";
-import RegisterSchema from "./RegisterSchema";
-import toast from "react-hot-toast";
 import { signIn } from "next-auth/react";
+import { IoCloseSharp } from "react-icons/io5";
+import useRegister from "./useRegister";
 
 const RegisterModal = () => {
-  const t = useTranslations("Auth");
-  const dispatch = useAppDispatch();
-  const [isLoading, setIsLoading] = useState(false);
-  const { showRegisterModal } = useAppSelector((store: RootState) => store.app);
-
-  const handleLoginClick = () => {
-    formik.resetForm();
-    dispatch(setShowLoginModal(true));
-    dispatch(setShowRegisterModal(false));
-  };
-
-  const handleModalClose = () => {
-    formik.resetForm();
-    dispatch(setShowRegisterModal(false));
-  };
-
-  const formik = useFormik({
-    initialValues: {
-      name: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    },
-    validationSchema: RegisterSchema,
-    onSubmit: async () => {
-      setIsLoading(true);
-      const { name, email, password } = formik.values;
-
-      try {
-        const data = {
-          name,
-          email,
-          password,
-        };
-
-        const requestOptions: RequestInit = {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        };
-        await fetch("/api/user/register/", requestOptions)
-          .then((res) => {
-            if (res?.ok) {
-              toast.success("Kayit basarili");
-              dispatch(setShowLoginModal(true));
-            } else {
-              // daha sonra error mesajlarini api'dan al.
-              toast.error(
-                "Kayitli email. Baska bir email ile kaydolmayi deneyin!"
-              );
-            }
-          })
-          .catch((error) => console.log({ error }))
-          .finally(() => {
-            dispatch(setShowRegisterModal(false));
-            setIsLoading(false);
-            formik.resetForm();
-          });
-      } catch (error) {
-        toast.error("Hata");
-      }
-    },
-  });
-
-  const isButtonDisabled = () => {
-    const { name, email, password, confirmPassword } = formik.values;
-    return !name || !email || !password || !confirmPassword || isLoading;
-  };
+  const {
+    isButtonDisabled,
+    formik,
+    showRegisterModal,
+    t,
+    isLoading,
+    handleLoginClick,
+    handleModalClose,
+  } = useRegister();
 
   if (showRegisterModal) {
     return (
