@@ -14,7 +14,7 @@ type Props = {
 const Place = ({ id, place }: Props) => {
   const t = useTranslations("Place");
 
-  const gatherings = place?.gatherings.sort(
+  const gatherings = place?.gatherings?.sort(
     (a, b) => Number(a.start) - Number(b.start)
   );
 
@@ -36,7 +36,7 @@ const Place = ({ id, place }: Props) => {
           </div>
           <Link href={`/users/${place?.ownerId}`}>
             <p className="text-lg ">
-              {t("owner")} {place?.owner.name}
+              {t("owner")} {place?.owner?.name}
             </p>
           </Link>
           <p className="w-full text-justify text-sm"> {place?.description}</p>

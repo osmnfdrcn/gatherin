@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import Select from "@/components/ui/select";
 import Warning from "@/components/common/warning";
 import { options } from "./helpers";
-import { useEditGathering } from "./useEditGathering";
+import useEditGathering from "./useEditGathering";
 
 type Props = {
   placeId: string;

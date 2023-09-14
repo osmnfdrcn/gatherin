@@ -6,7 +6,7 @@ import { useAppDispatch } from "@/store/store";
 import { useTranslations } from "next-intl";
 
 const SearchInput = () => {
-  const t = useTranslations("Home");
+  const t = useTranslations("Search");
   const dispatch = useAppDispatch();
 
   const handleClick = () => {

@@ -1,9 +1,9 @@
 {
   "Home": {
-    "owner": "Sahibi",
-    "search": "Mekan Ara"
+    "owner": "Sahibi"
   },
   "Search": {
+    "search": "Mekan Ara",
     "close": "Kapat(Esc)"
   },
   "Topbar": {

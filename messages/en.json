@@ -1,9 +1,9 @@
 {
   "Home": {
-    "owner": "Owner",
-    "search": "Search Places"
+    "owner": "Owner"
   },
-  "SearchModal": {
+  "Search": {
+    "search": "Search Places",
     "close": "Close(Esc)"
   },
   "Topbar": {
