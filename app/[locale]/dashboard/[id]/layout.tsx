@@ -1,5 +1,6 @@
 import PageWrapper from "@/components/layout/page-wrapper";
-import DashboardNav from "@/components/modules/dashboard/dashboard-nav/index.tsx";
+import DashboardNav from "@/components/modules/dashboard/dashboard-nav";
+
 import React from "react";
 
 type Props = { children: React.ReactNode; params: { id: string } };
