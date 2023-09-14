@@ -1,38 +1,16 @@
 "use client";
 import Logo from "@/components/common/logo";
-import Menu from "../menu";
 import Button from "@/components/ui/button";
-import { AiOutlinePlus } from "react-icons/ai";
-import { useTranslations } from "next-intl";
-import Link from "next-intl/link";
-import { RootState, useAppDispatch, useAppSelector } from "@/store/store";
-import { useWindowSize } from "@uidotdev/usehooks";
-import LanguageSwitcher from "../languageSwitcher";
-import linkedInIcon from "@/public/svgs/linkedin-blue.svg";
-import facebookIcon from "@/public/svgs/facebook-blue.svg";
-import instagramIcon from "@/public/svgs/instagram-blue.svg";
 import Image from "next/image";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { setShowLoginModal } from "@/store/slices/appSlice";
+import { AiOutlinePlus } from "react-icons/ai";
+import LanguageSwitcher from "../languageSwitcher";
+import Menu from "../menu";
+import { useSideNav } from "./useSideNav";
 
 const SideNav = () => {
-  const { data: session } = useSession();
-  const t = useTranslations("SideNav");
-  const router = useRouter();
-  const size = useWindowSize();
-  const { showMobileMenu } = useAppSelector((store: RootState) => store.app);
-  const dispatch = useAppDispatch();
+  const { showMobileMenu, size, handleOpenYourPlaceClick, t, socialIcons } =
+    useSideNav();
 
-  const socialIcons = [
-    { id: 0, icon: linkedInIcon },
-    { id: 1, icon: facebookIcon },
-    { id: 2, icon: instagramIcon },
-  ];
-
-  const handleOpenYourPlaceClick = () => {
-    session ? router.push("/open") : dispatch(setShowLoginModal(true));
-  };
   return (
     <div className={`${showMobileMenu ? "block" : "hidden"}  md:block`}>
       <nav className="w-full md:w-[320px] h-[calc(100vh-100px)] md:h-[100vh] bg-slate-50  pt-[40px] pb-2 px-[25px] absolute top-[100px] md:top-0 right-0 left-0 z-40 md:sticky flex flex-col justify-between ">

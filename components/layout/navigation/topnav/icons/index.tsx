@@ -2,36 +2,27 @@
 import Button from "@/components/ui/button";
 import { setShowLoginModal, setShowMobileMenu } from "@/store/slices/appSlice";
 import { RootState, useAppDispatch, useAppSelector } from "@/store/store";
-import { signOut, useSession } from "next-auth/react";
-import { useTranslations } from "next-intl";
-import { useRouter } from "next-intl/client";
-import { useRef, useState } from "react";
 import { HiOutlineMenu } from "react-icons/hi";
 import { IoCloseSharp } from "react-icons/io5";
-import { useOnClickOutside } from "usehooks-ts";
 import LanguageSwitcher from "../../languageSwitcher";
-import Wrapper from "@/components/layout/loader";
+import { useIcons } from "./useIcons";
 
 type Props = {
   showMenuBar?: boolean;
 };
 
 const Icons = ({ showMenuBar = true }: Props) => {
-  const t = useTranslations("Topbar");
-  const { data: session, status } = useSession();
-  const [showUserMenu, setShowUserMenu] = useState(false);
-  const ref = useRef(null);
-  const router = useRouter();
-  const dispatch = useAppDispatch();
+  const {
+    t,
+    session,
+    setShowUserMenu,
+    showUserMenu,
+    handleProfileClick,
+    dispatch,
+    signOut,
+    status,
+  } = useIcons(showMenuBar);
 
-  const handleProfileClick = () => {
-    setShowUserMenu(false);
-    router.push(`/users/${session?.user.id}`);
-  };
-  const handleClickOutside = () => {
-    setShowUserMenu(false);
-  };
-  useOnClickOutside(ref, handleClickOutside);
   return (
     <div
       className={`h-[40px] ${

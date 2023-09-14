@@ -1,38 +1,13 @@
 "use client";
-import bookingsIcon from "@/public/svgs/bookings.svg";
-import dashboardIcon from "@/public/svgs/dashboard.svg";
-import homepageIcon from "@/public/svgs/homepage.svg";
-import { useSession } from "next-auth/react";
-import { useTranslations } from "next-intl";
+
 import Image from "next/image";
 import Button from "@/components/ui/button";
 import Link from "next-intl/link";
-import { useAppDispatch } from "@/store/store";
 import { setShowMobileMenu } from "@/store/slices/appSlice";
+import { useMenu } from "./useMenu";
 
 const Menu = () => {
-  const t = useTranslations("SideNav");
-  const { data: session } = useSession();
-  const dispatch = useAppDispatch();
-
-  const menuIcons = session
-    ? [
-        { id: 0, icon: homepageIcon, title: t("home"), link: "/" },
-        {
-          id: 1,
-          icon: bookingsIcon,
-          title: t("my-bookings"),
-          link: "/bookings",
-        },
-        {
-          id: 2,
-          icon: dashboardIcon,
-          title: t("dashboard"),
-          link: "/dashboard",
-        },
-      ]
-    : [{ id: 0, icon: homepageIcon, title: t("home"), link: "/" }];
-
+  const { t, dispatch, menuIcons } = useMenu();
   return (
     <>
       {menuIcons.map((i) => (

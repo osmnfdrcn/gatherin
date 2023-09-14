@@ -1,83 +1,44 @@
 "use client";
-import AuthRequired from "@/components/common/warning";
 import Title from "@/components/common/title";
 import Button from "@/components/ui/button";
 import DatePicker from "@/components/ui/datepicker";
 import { Input } from "@/components/ui/input";
 import Select from "@/components/ui/select";
-import { IPlace } from "@/types";
-import { addMinutes, format } from "date-fns";
-import { useSession } from "next-auth/react";
-import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 import Warning from "@/components/common/warning";
+import { options } from "./helpers";
+import { useEditGathering } from "./useEditGatherings";
+
 type Props = {
   placeId: string;
 };
 
 const EditGatherings = ({ placeId }: Props) => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const today = format(new Date(), "dd/MM/yyyy");
-  const [date, setDate] = useState<string>(today);
-  const [time, setTime] = useState<string>("00:00");
-  const [duration, setDuration] = useState<any>(30);
-  const [description, setDescription] = useState("");
-  const [place, setPlace] = useState<IPlace | null>(null);
-  const t = useTranslations("Gathering");
-  const { data: session, status } = useSession();
-  let start = formatDate(date, time);
-  let [hours, minutes] = time.split(":");
-  const end = addMinutes(start, duration);
-  const data = { start, end, userId: session?.user.id, placeId, description };
-  const [error, setError] = useState(false);
-
-  if (status !== "authenticated") {
-    return <Warning text="auth-warning" />;
-  }
-  const handleClick = () => {
-    setIsLoading(true);
-    const requestOptions: RequestInit = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    };
-
-    fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/gathering/`, requestOptions)
-      .then((res) => {
-        if (res?.ok) {
-          toast.success(t("success"));
-          setIsEditing(false);
-          setDescription("");
-        } else {
-          toast.error(t("error"));
-        }
-      })
-      .catch((error) => {
-        toast.error(t("error"));
-      })
-      .finally(async () => {
-        setIsLoading(false);
-      });
-  };
-
-  useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/place/?id=${placeId}`, {
-      cache: "no-cache",
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        setPlace(res[0]);
-      })
-      .catch(() => setError(true));
-  }, []);
+  const {
+    t,
+    status,
+    error,
+    date,
+    setDate,
+    isEditing,
+    time,
+    setTime,
+    setDuration,
+    description,
+    setDescription,
+    isLoading,
+    handleClick,
+    setIsEditing,
+    isOwnerOfPlace,
+  } = useEditGathering(placeId);
 
   if (error) {
     return <Warning text="404" />;
   }
 
-  const isOwnerOfPlace = session.user.id === place?.ownerId;
+  if (status !== "authenticated") {
+    return <Warning text="auth-warning" />;
+  }
+
   if (isOwnerOfPlace && !error) {
     return (
       <div className="w-full p-4 bg-slate-100 h-auto ">
@@ -101,17 +62,8 @@ const EditGatherings = ({ placeId }: Props) => {
               <div className=" w-full col-span-4 md:col-span-2 lg:col-span-1">
                 <Select
                   label={""}
-                  onChange={(e) => setDuration(e.target.value)}
-                  options={[
-                    { id: "30", name: "0.5 hours" },
-                    { id: "60", name: "1 hour" },
-                    { id: "90", name: "1.5 hours" },
-                    { id: "120", name: "2 hour" },
-                    { id: "150", name: "2.5 hours" },
-                    { id: "180", name: "3 hour" },
-                    { id: "210", name: "3.5 hours" },
-                    { id: "240", name: "4 hour" },
-                  ]}
+                  onChange={(e) => setDuration(+e.target.value)}
+                  options={options}
                   isError={"true"}
                   errorMessage={""}
                   name={"name"}
@@ -158,23 +110,3 @@ const EditGatherings = ({ placeId }: Props) => {
 };
 
 export default EditGatherings;
-
-function formatDate(inputDate: string, inputTime: string) {
-  const dateParts = inputDate.split("/");
-  const timeParts = inputTime.split(":");
-
-  if (dateParts.length !== 3) {
-    throw new Error("Invalid input format");
-  }
-  let [day, month, year] = dateParts;
-  month = month.replace(/^0+/, "");
-  day = day.replace(/^0+/, "");
-
-  let [hour, minute] = timeParts;
-  hour = hour.replace(/^0+/, "") || "0";
-  minute = minute.replace(/^0+/, "") || "0";
-
-  const formattedDate = new Date(+year, +month - 1, +day, +hour, +minute, 0);
-
-  return formattedDate;
-}
