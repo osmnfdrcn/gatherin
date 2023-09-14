@@ -1,15 +1,10 @@
 "use client";
-import AuthRequired from "@/components/common/warning";
 import Title from "@/components/common/title";
-import Spinner from "@/components/layout/spinner";
-import Button from "@/components/ui/button";
-import { IPlace } from "@/types";
-import { useSession } from "next-auth/react";
-import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
 import Warning from "@/components/common/warning";
-import { useDashboard } from "./useDashboard";
+import Spinner from "@/components/layout/spinner";
+import { IPlace } from "@/types";
 import PlaceCard from "./place-card";
+import { useDashboard } from "./useDashboard";
 
 const Dashboard = () => {
   const { t, status, isLoading, places } = useDashboard();

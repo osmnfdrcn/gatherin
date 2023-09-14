@@ -1,4 +1,11 @@
 {
+  "Home": {
+    "owner": "Owner",
+    "search": "Search Places"
+  },
+  "SearchModal": {
+    "close": "Close(Esc)"
+  },
   "Topbar": {
     "login": "Login",
     "logout": "Log out",
@@ -46,13 +53,6 @@
     "success": "Profile Updated!",
     "error": "Encountered an Error!"
   },
-  "Home": {
-    "owner": "Owner"
-  },
-  "Search": {
-    "search": "Search Places",
-    "close": "Close(Esc)"
-  },
   "Place": {
     "owner": "Owner",
     "join": "Join"
@@ -79,7 +79,6 @@
   "Gathering": {
     "success": "Event Created!",
     "error": "Encountered an Error!",
-
     "add-new-date": "Add New Date",
     "add-opening": "Add Opening Date & Time",
     "save": "Save",

@@ -1,4 +1,11 @@
 {
+  "Home": {
+    "owner": "Sahibi",
+    "search": "Mekan Ara"
+  },
+  "Search": {
+    "close": "Kapat(Esc)"
+  },
   "Topbar": {
     "login": "Giris",
     "logout": "Cikis",
@@ -45,13 +52,6 @@
     "warning": "Icerige erismek icin giris yapin!",
     "success": "Profil Guncellendi!",
     "error": "Bir sorun ile karsilasildi!"
-  },
-  "Home": {
-    "owner": "Sahibi"
-  },
-  "Search": {
-    "search": "Mekan Ara",
-    "close": "Kapat(Esc)"
   },
   "Place": {
     "owner": "Sahibi",

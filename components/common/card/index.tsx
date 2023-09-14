@@ -15,8 +15,8 @@ const Card = ({ image, owner, ownerId, name, placeId }: Props) => {
 
   return (
     <div className="relative  h-auto shadow-md rounded-lg transition delay-100 bg-slate-50 brightness-100 hover:brightness-95">
-      <div className="relative bg-no-repeat bg-center h-[250px] md:h-[310px] shadow-md cursor-pointer rounded-lg  transition delay-100">
-        <Link href={`/place/${placeId}`}>
+      <Link href={`/place/${placeId}`} className="relative">
+        <div className="relative bg-no-repeat bg-center h-[250px] md:h-[310px] shadow-md cursor-pointer rounded-lg  transition delay-100">
           <Image
             src={image}
             alt={name}
@@ -24,8 +24,9 @@ const Card = ({ image, owner, ownerId, name, placeId }: Props) => {
             style={{ objectFit: "cover" }}
             className=" rounded-xl  "
           />
-        </Link>
-      </div>
+        </div>
+      </Link>
+
       <div className="flex flex-col justify-between gap-4 py-4 px-2 h-[100px]">
         <p className="text-lg font-semibold ">{name}</p>
         <Link href={`/users/${ownerId}`}>
