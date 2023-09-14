@@ -16,7 +16,6 @@ const OpenYourOwnPlace = () => {
     formik,
     isButtonDisabled,
     status,
-    router,
     t,
   } = useYourOwnPlace();
 

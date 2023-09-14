@@ -1,16 +1,21 @@
-import { IPlace } from "@/types";
 import { useFormik } from "formik";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useReducer } from "react";
 import toast from "react-hot-toast";
+import { initialState, reducer } from "./reducer";
+
+const initialFormikValues = {
+  name: "",
+  description: "",
+  labels: "",
+};
 
 export const useYourOwnPlace = () => {
-  const [image, setImage] = useState<string>("");
-  const [bgImage, setBgImage] = useState<string>("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { isLoading, image, bgImage, error } = state;
+
   const router = useRouter();
   const t = useTranslations("OpenYourPlace");
 
@@ -23,7 +28,7 @@ export const useYourOwnPlace = () => {
     },
 
     onSubmit: async () => {
-      setIsLoading(true);
+      dispatch({ type: "SET_ISLOADING", payload: true });
       const { name, description } = formik.values;
       try {
         const data = {
@@ -48,8 +53,8 @@ export const useYourOwnPlace = () => {
           .then((res) => {
             if (res?.ok) {
               toast.success(t("success"));
-              setImage("");
-              setBgImage("");
+              dispatch({ type: "SET_IMAGE", payload: "" });
+              dispatch({ type: "SET_BGIMAGE", payload: "" });
               router.push("/dashboard");
             } else {
               toast.error(t("error"));
@@ -60,7 +65,7 @@ export const useYourOwnPlace = () => {
           })
           .finally(async () => {
             formik.resetForm();
-            setIsLoading(false);
+            dispatch({ type: "SET_ISLOADING", payload: false });
           });
       } catch (error) {}
     },
@@ -70,6 +75,10 @@ export const useYourOwnPlace = () => {
     const { name, description } = formik.values;
     return !name || !description || !image || !bgImage || isLoading;
   }, [formik.values, image, bgImage, isLoading]);
+
+  const setImage = (v: string) => dispatch({ type: "SET_IMAGE", payload: v });
+  const setBgImage = (v: string) =>
+    dispatch({ type: "SET_BGIMAGE", payload: v });
 
   return {
     error,
@@ -81,13 +90,6 @@ export const useYourOwnPlace = () => {
     formik,
     isButtonDisabled,
     status,
-    router,
     t,
   };
-};
-
-const initialFormikValues = {
-  name: "",
-  description: "",
-  labels: "",
 };
