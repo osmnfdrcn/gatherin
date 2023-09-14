@@ -1,17 +1,20 @@
-import { IPlace } from "@/types";
 import { useFormik } from "formik";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useReducer, useState } from "react";
 import toast from "react-hot-toast";
+import { initialState, reducer } from "./reducer";
+
+const initialFormikValues = {
+  name: "",
+  description: "",
+  labels: "",
+};
 
 export const useEditPlace = (placeId: string) => {
-  const [place, setPlace] = useState<IPlace | null>(null);
-  const [image, setImage] = useState<string>("");
-  const [bgImage, setBgImage] = useState<string>("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { isLoading, image, bgImage, error, place } = state;
   const router = useRouter();
   const t = useTranslations("OpenYourPlace");
 
@@ -24,7 +27,7 @@ export const useEditPlace = (placeId: string) => {
     },
 
     onSubmit: async () => {
-      setIsLoading(true);
+      dispatch({ type: "SET_ISLOADING", payload: true });
       const { name, description } = formik.values;
       try {
         const data = {
@@ -49,8 +52,8 @@ export const useEditPlace = (placeId: string) => {
         )
           .then((res) => {
             if (res?.ok) {
-              setImage("");
-              setBgImage("");
+              dispatch({ type: "SET_IMAGE", payload: "" });
+              dispatch({ type: "SET_BGIMAGE", payload: "" });
               router.push("/dashboard");
             } else {
               toast.error(t("error"));
@@ -61,7 +64,7 @@ export const useEditPlace = (placeId: string) => {
           })
           .finally(async () => {
             formik.resetForm();
-            setIsLoading(false);
+            dispatch({ type: "SET_ISLOADING", payload: false });
           });
       } catch (error) {}
     },
@@ -79,26 +82,30 @@ export const useEditPlace = (placeId: string) => {
   const isOwnerOfPlace = session?.user.id === place?.ownerId;
 
   useEffect(() => {
-    setIsLoading(true);
+    dispatch({ type: "SET_ISLOADING", payload: true });
     if (placeId) {
       fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/place/?id=${placeId}`, {
         cache: "no-cache",
       })
         .then((res) => res.json())
         .then((res) => {
-          setPlace(res[0]);
-          setBgImage(res[0].bgImage);
-          setImage(res[0].image);
+          dispatch({ type: "SET_PLACE", payload: res[0] });
+          dispatch({ type: "SET_IMAGE", payload: res[0].image });
+          dispatch({ type: "SET_BGIMAGE", payload: res[0].bgImage });
           formik.setValues({
             name: res[0].name || "", // Use the name from place if available
             description: res[0].description || "",
             labels: "",
           });
         })
-        .catch(() => setError(true))
-        .finally(() => setIsLoading(false));
+        .catch(() => dispatch({ type: "SET_ERROR", payload: true }))
+        .finally(() => dispatch({ type: "SET_ISLOADING", payload: false }));
     }
   }, []);
+
+  const setImage = (v: string) => dispatch({ type: "SET_IMAGE", payload: v });
+  const setBgImage = (v: string) =>
+    dispatch({ type: "SET_BGIMAGE", payload: v });
 
   return {
     place,
@@ -115,10 +122,4 @@ export const useEditPlace = (placeId: string) => {
     router,
     t,
   };
-};
-
-const initialFormikValues = {
-  name: "",
-  description: "",
-  labels: "",
 };

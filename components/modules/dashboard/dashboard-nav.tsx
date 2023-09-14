@@ -12,6 +12,7 @@ const DashboardNav = ({ placeId }: { placeId: string }) => {
     { id: 1, text: t("edit-gatherings"), link: "edit-gatherings" },
     { id: 2, text: t("bookings"), link: "bookings" },
   ];
+
   return (
     <div className="w-full bg-slate-100 h-full flex items-center justify-start gap-4 p-4 mt-2  rounded-lg font">
       {menu.map((m) => (
