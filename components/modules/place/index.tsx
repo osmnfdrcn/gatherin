@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import { EventCard } from "./event-card";
+import isFuture from "date-fns/isFuture";
 
 type Props = {
   id: string;
@@ -14,9 +15,7 @@ type Props = {
 const Place = ({ id, place }: Props) => {
   const t = useTranslations("Place");
 
-  const gatherings = place?.gatherings?.sort(
-    (a, b) => Number(a.start) - Number(b.start)
-  );
+  const gatherings = place?.gatherings?.filter((g) => isFuture(g.end));
 
   return (
     <div className="w-full  bg-slate-100 p-3 md:p-10 mt-2 rounded-lg">

@@ -14,11 +14,7 @@ const PlacePage = async ({ params: { id } }: Props) => {
 
   return (
     <PageWrapper>
-      {place ? (
-        <Place id={id} place={place as any} />
-      ) : (
-        <Warning text={"404"} />
-      )}
+      {place ? <Place id={id} place={place} /> : <Warning text={"404"} />}
     </PageWrapper>
   );
 };

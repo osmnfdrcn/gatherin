@@ -1,15 +1,21 @@
 import prisma from "@/lib/prismadb";
+import { IPlace } from "@/types";
 
 export const getPlaces = async () => {
   try {
-    const places = await prisma.place.findMany({
+    const placesData = await prisma.place.findMany({
       include: {
         owner: true,
         gatherings: true,
       },
     });
 
-    if (!places) return null;
+    if (!placesData) return null;
+    const places = placesData.map((place) => ({
+      ...place,
+      owner: place.owner,
+      gatherings: place.gatherings,
+    }));
     return places;
   } catch (error) {
     return null;

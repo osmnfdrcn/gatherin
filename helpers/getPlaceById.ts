@@ -8,7 +8,11 @@ export const getPlaceById = async (id: string) => {
       },
       include: {
         owner: true,
-        gatherings: true,
+        gatherings: {
+          orderBy: {
+            start: "asc",
+          },
+        },
       },
     });
     if (!place) {

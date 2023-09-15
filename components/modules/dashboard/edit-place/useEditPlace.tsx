@@ -54,6 +54,7 @@ export const useEditPlace = (placeId: string) => {
             if (res?.ok) {
               dispatch({ type: "SET_IMAGE", payload: "" });
               dispatch({ type: "SET_BGIMAGE", payload: "" });
+              router.refresh();
               router.push("/dashboard");
             } else {
               toast.error(t("error"));

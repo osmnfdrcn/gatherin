@@ -8,6 +8,6 @@ export type IUser = Omit<User, "createdAt" | "updatedAt" | "emailVerified"> & {
 };
 
 export type IPlace = Place & {
-  owner: IUser;
+  owner: User;
   gatherings: Gathering[];
 };

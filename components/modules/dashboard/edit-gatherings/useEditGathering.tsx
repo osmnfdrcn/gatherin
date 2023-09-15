@@ -5,12 +5,13 @@ import toast from "react-hot-toast";
 import { addMinutes } from "date-fns";
 import { formatDate } from "./helpers";
 import { initialState, reducer } from "./reducer";
+import { useRouter } from "next/navigation";
 
 export const useEditGathering = (placeId: string) => {
   const { data: session, status } = useSession();
   const t = useTranslations("Gathering");
   const [state, dispatch] = useReducer(reducer, initialState);
-
+  const router = useRouter();
   const {
     isEditing,
     isLoading,
@@ -48,6 +49,7 @@ export const useEditGathering = (placeId: string) => {
           toast.success(t("success"));
           dispatch({ type: "SET_ISEDITING", payload: false });
           dispatch({ type: "SET_DESCRIPTION", payload: "" });
+          router.refresh();
         } else {
           toast.error(t("error"));
         }

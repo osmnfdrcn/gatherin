@@ -21,7 +21,6 @@ const EditPlace = ({ placeId }: Props) => {
     formik,
     isButtonDisabled,
     status,
-    router,
     t,
   } = useEditPlace(placeId);
 
