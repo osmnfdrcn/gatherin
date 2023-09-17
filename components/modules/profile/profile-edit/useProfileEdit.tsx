@@ -29,10 +29,7 @@ export const useProfileEdit = (setIsEditing: (v: boolean) => void) => {
         body: JSON.stringify(data),
       };
 
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_SITE_URL}/api/user/update`,
-        requestOptions
-      );
+      const response = await fetch(`/api/user/update`, requestOptions);
 
       if (response.ok) {
         toast.success(t("success"));

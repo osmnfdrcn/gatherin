@@ -11,12 +11,9 @@ export const useDashboard = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(
-      `${process.env.NEXT_PUBLIC_SITE_URL}/api/place/?ownerId=${session?.user.id}`,
-      {
-        cache: "no-cache",
-      }
-    )
+    fetch(`/api/place/?ownerId=${session?.user.id}`, {
+      cache: "no-cache",
+    })
       .then((res) => res.json())
       .then((res) => setPlaces(res))
       .catch(() => {})

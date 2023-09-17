@@ -20,7 +20,7 @@ export const useYourOwnPlace = () => {
   const t = useTranslations("OpenYourPlace");
 
   const { data: session, status } = useSession();
-  const url = ` ${process.env.NEXT_PUBLIC_SITE_URL}/api/place/create"`;
+  const url = `/api/place/create"`;
 
   const formik = useFormik({
     initialValues: {
@@ -46,10 +46,7 @@ export const useYourOwnPlace = () => {
           cache: "no-cache",
         };
 
-        await fetch(
-          `${process.env.NEXT_PUBLIC_SITE_URL}/api/place`,
-          requestOptions
-        )
+        await fetch(`/api/place`, requestOptions)
           .then((res) => {
             if (res?.ok) {
               toast.success(t("success"));

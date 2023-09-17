@@ -19,7 +19,7 @@ export const useEditPlace = (placeId: string) => {
   const t = useTranslations("OpenYourPlace");
 
   const { data: session, status } = useSession();
-  const url = ` ${process.env.NEXT_PUBLIC_SITE_URL}/api/place/update`;
+  const url = `/api/place/update`;
 
   const formik = useFormik({
     initialValues: {
@@ -46,10 +46,7 @@ export const useEditPlace = (placeId: string) => {
           cache: "no-cache",
         };
 
-        await fetch(
-          `${process.env.NEXT_PUBLIC_SITE_URL}/api/place`,
-          requestOptions
-        )
+        await fetch(`/api/place`, requestOptions)
           .then((res) => {
             if (res?.ok) {
               dispatch({ type: "SET_IMAGE", payload: "" });
@@ -85,7 +82,7 @@ export const useEditPlace = (placeId: string) => {
   useEffect(() => {
     dispatch({ type: "SET_ISLOADING", payload: true });
     if (placeId) {
-      fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/place/?id=${placeId}`, {
+      fetch(`/api/place/?id=${placeId}`, {
         cache: "no-cache",
       })
         .then((res) => res.json())
