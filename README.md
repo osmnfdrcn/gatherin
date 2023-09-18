@@ -1,5 +1,11 @@
 # GATHER-IN
 
+Gather-in is an app, designed to facilitate online social interactions by allowing users to join virtual gatherings via connecting video chats.
+Users can create their own places and schdule events, which will then automatically activate at a date and time of their choosing.
+Othr users can view evnts on the place page. If there is an ongoing event, they can join it, or if they're interested in a future event, they can see its date and time.
+
+Original app : gatherin.life
+
 ## Calistirma
 
 env dosyasina eklenmesi gerekenler:
@@ -23,19 +29,17 @@ npm run start
 
 - Typescript, NextJS, Redux Toolkit, Tailwind CSS, Next-Auth, Next-Intl, Cloudinary, ZegoCloud
 
-### Ana Ozellikler
+### 1.Authentication
 
-## 1.Authentication
+- Users have the option to sign up and log in either through their social media accounts or by creating a gatherin account using their email.
+- Authentication's implemented by using Next-Auth.
 
-- Kullanicilar kayit ve login olmak icin hem kendi sosya medya hesaplarini kullanabilirler hem de isterlerse email adreslerini kullarak yeni bir hesap olusturabilirler.
-- Authentication's icin Next-Auth kullanilmistir.
+### 2.Multi-Languaagee
 
-## 2.Coklu Dil Destegi
+- Application supports both Turkish and English.
+- Multi-language feature's implemented by using Next-Intl.
 
-- Uygulama hem Turkce, hem Ingilizce dil destegi saglamaktadir.
-- Coklu dil destegi icin Next-Intl kullanilmistir.
+### 3.Video Conferencing
 
-## 3.Video Konferans
-
-- Kullanicilar aktif olan bir event'e katilip birbirleri ile video konferans araciligi ile gorusebilirler.
-- Video konferans destegi icin ZegoCloud kullanilmistir.
+- When a gathering is active, users can join and communicate with each other.
+- Video Conferencing's implemented by using ZegoCloud.
