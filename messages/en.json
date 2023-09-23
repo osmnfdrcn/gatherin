@@ -1,6 +1,9 @@
 {
   "Home": {
-    "owner": "Owner"
+    "owner": "Owner",
+    "closest-event": "Closest Gathring",
+    "no-event": "No gathering!",
+    "active": "ACTIVE GATHERING"
   },
   "Search": {
     "search": "Search Places",
@@ -86,18 +89,18 @@
     "join": "Join"
   },
   "Months": {
-    "January": "January",
-    "February": "February",
-    "March": "March",
-    "April": "April",
+    "January": "Jan.",
+    "February": "Feb.",
+    "March": "Mar.",
+    "April": "Apr",
     "May": "May",
-    "June": "June",
-    "July": "July",
-    "August": "August",
-    "September": "September",
-    "October": "October",
-    "November": "November",
-    "December": "December"
+    "June": "Jun.",
+    "July": "Jul.",
+    "August": "Aug.",
+    "September": "Sep.",
+    "October": "Oct.",
+    "November": "Nov.",
+    "December": "Dec."
   },
   "Warning": {
     "404": "Page not found",

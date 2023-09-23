@@ -43,7 +43,7 @@ export const useEditGathering = (placeId: string) => {
       body: JSON.stringify(data),
     };
 
-    fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/gathering/`, requestOptions)
+    fetch(`/api/gathering/`, requestOptions)
       .then((res) => {
         if (res?.ok) {
           toast.success(t("success"));
@@ -63,7 +63,7 @@ export const useEditGathering = (placeId: string) => {
   };
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/place/?id=${placeId}`, {
+    fetch(`/api/place/?id=${placeId}`, {
       cache: "no-cache",
     })
       .then((res) => res.json())

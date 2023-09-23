@@ -1,4 +1,4 @@
-import Card from "@/components/common/card";
+import PlaceCard from "@/components/common/place-card";
 import SearchInput from "@/components/layout/page-header/search-input";
 import Banner from "@/components/modules/home/banner";
 import { IPlace } from "@/types";
@@ -17,13 +17,14 @@ const Home = ({ places }: Props) => {
       <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-4 px-4 ">
         {places?.map((p) => {
           return (
-            <Card
+            <PlaceCard
               key={p.id}
               image={p?.image}
               owner={p?.owner?.name}
               ownerId={p?.owner?.id}
               name={p?.name}
               placeId={p?.id}
+              gatherings={p.gatherings}
             />
           );
         })}

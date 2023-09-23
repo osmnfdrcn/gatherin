@@ -17,9 +17,7 @@ const useSearch = () => {
   const handleSubmit = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      const url = `${
-        process.env.NEXT_PUBLIC_SITE_URL
-      }/api/place/?search=${searchString.toLowerCase()}`;
+      const url = `/api/place/?search=${searchString.toLowerCase()}`;
       const headers = {
         Accept: "application/json",
         "Content-Type": "application/json",

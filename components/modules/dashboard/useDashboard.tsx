@@ -12,7 +12,7 @@ export const useDashboard = () => {
   useEffect(() => {
     setIsLoading(true);
     fetch(
-      `${process.env.NEXT_PUBLIC_SITE_URL}/api/place/?ownerId=${session?.user.id}`,
+      `/api/place/?ownerId=${session?.user.id}`,
       {
         cache: "no-cache",
       }

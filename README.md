@@ -1,34 +1,58 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# GATHER-IN
 
-## Getting Started
+## RUN
+In order to run this application, env file should be edited with folowing variables
+- `DATABASE_URL`
+- `NEXT_AUTH_SECRET`
+- `GITHUB_ID`
+- `GITHUB_SECRET`
+- `GOOGLE_CLIENT_ID`
+- `GOOGLE_CLIENT_SECRET`
 
-First, run the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+  git clone https://github.com/osmnfdrcn/gatherin.git
+  npm install
+  npm run build
+  npm run start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tech-Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Typescript, NextJS, Redux Toolkit, Tailwind CSS, Next-Auth, Next-Intl, Cloudinary, Zegocloud
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Fonksiyonalite ve Ozellikler
 
-## Learn More
+### 1.Filtreleme ve Listeleme
 
-To learn more about Next.js, take a look at the following resources:
+- Kitaplar tur, yazar, yayinevi ve dil kriterlerine gore filtrelenebilir.
+- Herhangi bir kritere gore filtreleme yapildiginda diger kriterlerin icerigi ve listelenen kitaplar da dinamik olarak guncellenir.
+- Filtre alani istenildigi takdirde gizlenebilir ve tekrar gosterilebilir.
+- Sonuc alaninda varsayilan olarak 10 urun gsosterilmekte olup istendigi takdirde header alaninda degistirilebilir.
+- Sonuclarin gosterimi icin pagination kullanilmistir.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 2.Arama
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Sayfanin navigation bar’inda bulunan search ikonuna tiklanarak arama modal’i acilir.
+- Arama kitap ismi ve yazar ismine gore yapilabilir.
+- Arama input’unda debouncing degeri 100ms’dir.
 
-## Deploy on Vercel
+### 3.Sepet
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Bir kitapin sayfasina girilip kitap sepete eklenebilir.
+- Alinabilecek maksimum kitap sayisi kitabin stoktaki sayisi ile sinirlidir.
+- Eger kitap halihazirda zaten sepete eklenmis ise eklenebilecek kitap sayisi stok sayisi - kitabin sepetteki sayisi kadardir. Her durumda stok sayisindan fazla alim yapilamaz. Denendigi takdirde bir uyari mesaji gosterilir.
+- Kitabin stok’durumu kendi sayfasinda gorulebilir.
+- Kitap sepete eklenip satin alinincaya kadar, stok sayisi duser ve kitabin sepetteki sayisi stoktan fazla ise kitap satin alinamaz ve kullaniciya bir uyari mesaji gosterilir.
+- Kitap satin alindiktan sonra kitabin DB’deki stok sayisi guncellenir.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### 4.Kitap
+
+- Listelenen bir kitaba tiklandiginda kullanici ilgili kitabin detaylarina ulasabilecegi kitap sayfasina yonlenir.
+- Sayfada kitabin ismi, yayinevi, turu, fiyati ve stok adedi gibi bilgiler yaninda daha once ziyaret edilmis kitaplarin listesi de yer alir.
+- Kullanici ayrica bu sayfada istedigi takdirde stok sayisini asmamak kaydi ile istedigi kadar kitabi sepete ekleyebilir.
+
+### 5.Yazar
+
+- Kitap sayfasinda yer alan yazar adina tiklandiginda kullanici ilgili kitabin yazari ile ilgili bilgiye ulasabilecegi yazar sayfasina yonlenir.
+- Sayfada yazar ile ilgili bilgler ve yazarin maagazada bulunan kitaplarinin listesine ulasilabilir.

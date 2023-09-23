@@ -1,6 +1,9 @@
 {
   "Home": {
-    "owner": "Sahibi"
+    "owner": "Sahibi",
+    "closest-event": "En Yakin Toplanti",
+    "no-event": "Toplanti yok!",
+    "active": "AKTIF TOPLANTI"
   },
   "Search": {
     "search": "Mekan Ara",
@@ -87,18 +90,18 @@
     "join": "Katil"
   },
   "Months": {
-    "January": "Ocak",
-    "February": "Subat",
-    "March": "Mart",
-    "April": "Nisan",
-    "May": "Mayis",
-    "June": "Haziran",
-    "July": "Temmuz",
-    "August": "Agustos",
-    "September": "Eylul",
-    "October": "Ekim",
-    "November": "Kasim",
-    "December": "Aralik"
+    "January": "Oca",
+    "February": "Sub",
+    "March": "Mar",
+    "April": "Nis",
+    "May": "May",
+    "June": "Haz",
+    "July": "Tem",
+    "August": "Agu",
+    "September": "Eyl",
+    "October": "Eki",
+    "November": "Kas",
+    "December": "Ara"
   },
   "Warning": {
     "404": "Aradiginiz Sayfa Bulunamadi",

@@ -6,7 +6,11 @@ export const getPlaces = async () => {
     const placesData = await prisma.place.findMany({
       include: {
         owner: true,
-        gatherings: true,
+        gatherings: {
+          orderBy: {
+            start: "asc",
+          },
+        },
       },
     });
 
