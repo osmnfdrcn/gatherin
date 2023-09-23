@@ -11,18 +11,9 @@ export const useDashboard = () => {
 
   useEffect(() => {
     setIsLoading(true);
-<<<<<<< HEAD
-    fetch(
-      `/api/place/?ownerId=${session?.user.id}`,
-      {
-        cache: "no-cache",
-      }
-    )
-=======
     fetch(`/api/place/?ownerId=${session?.user.id}`, {
       cache: "no-cache",
     })
->>>>>>> 48b618d1e7ca7c8d8d02eb4e9720c6761e721a20
       .then((res) => res.json())
       .then((res) => setPlaces(res))
       .catch(() => {})

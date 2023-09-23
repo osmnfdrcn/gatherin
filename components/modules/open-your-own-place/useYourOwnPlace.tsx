@@ -20,11 +20,7 @@ export const useYourOwnPlace = () => {
   const t = useTranslations("OpenYourPlace");
 
   const { data: session, status } = useSession();
-<<<<<<< HEAD
-  const url = ` /api/place/create"`;
-=======
   const url = `/api/place/create"`;
->>>>>>> 48b618d1e7ca7c8d8d02eb4e9720c6761e721a20
 
   const formik = useFormik({
     initialValues: {
