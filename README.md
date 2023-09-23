@@ -8,7 +8,7 @@ Original app : gatherin.life
 
 ## RUN
 
-env dosyasina eklenmesi gerekenler:
+in ordr to run the app, followings variables must be added to env file.
 
 - `DATABASE_URL`
 - `NEXT_AUTH_SECRET`
